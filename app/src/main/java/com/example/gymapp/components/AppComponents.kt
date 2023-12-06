@@ -47,6 +47,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 //import androidx.compose.material.icons.filled.Visibility
 //import androidx.compose.material.icons.filled.VisibilityOff
@@ -315,4 +316,22 @@ fun DividerTextComponent() {
             thickness = 1.dp
         )
     }
+}
+
+@Composable
+fun UnderLinedTextComponent(value: String) {
+    Text(
+        text = value,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 40.dp),
+        style = TextStyle(
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Normal,
+            fontStyle = FontStyle.Normal
+        ), color = colorResource(id = R.color.colorGray),
+        textAlign = TextAlign.Center,
+        textDecoration = TextDecoration.Underline
+    )
+
 }
