@@ -1,6 +1,9 @@
 package com.example.gymapp.components
 
 import android.util.Log
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -11,12 +14,14 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.Button
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -24,6 +29,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
@@ -47,6 +54,7 @@ import androidx.compose.ui.unit.sp
 import com.example.gymapp.R
 import com.example.gymapp.ui.theme.BgColor
 import com.example.gymapp.ui.theme.Primary
+import com.example.gymapp.ui.theme.Secondary
 
 
 @Composable
@@ -233,5 +241,42 @@ fun CheckboxComponent(
             })
 
         ClickableTextComponent(value = value, onTextSelected)
+    }
+}
+
+
+@Composable
+fun ButtonComponent(value: String, onButtonClicked: () -> Unit, isEnabled: Boolean = false) {
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(48.dp),
+        onClick = {
+            onButtonClicked.invoke()
+        },
+        contentPadding = PaddingValues(),
+        colors = ButtonDefaults.buttonColors(Color.Transparent),
+        shape = RoundedCornerShape(50.dp),
+        enabled = isEnabled
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(48.dp)
+                .background(
+                    brush = Brush.horizontalGradient(listOf(Secondary, Primary)),
+                    shape = RoundedCornerShape(50.dp)
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = value,
+                fontSize = 18.sp,
+                color = Color.White,
+                fontWeight = FontWeight.Bold
+            )
+
+        }
+
     }
 }
