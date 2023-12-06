@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
@@ -22,6 +23,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -53,8 +55,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gymapp.R
 import com.example.gymapp.ui.theme.BgColor
+import com.example.gymapp.ui.theme.GrayColor
 import com.example.gymapp.ui.theme.Primary
 import com.example.gymapp.ui.theme.Secondary
+import com.example.gymapp.ui.theme.TextColor
 
 
 @Composable
@@ -278,5 +282,37 @@ fun ButtonComponent(value: String, onButtonClicked: () -> Unit, isEnabled: Boole
 
         }
 
+    }
+}
+
+
+@Composable
+fun DividerTextComponent() {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            color = GrayColor,
+            thickness = 1.dp
+        )
+
+        Text(
+            modifier = Modifier.padding(8.dp),
+            text = stringResource(R.string.or),
+            fontSize = 18.sp,
+            color = TextColor
+        )
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            color = GrayColor,
+            thickness = 1.dp
+        )
     }
 }
