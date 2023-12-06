@@ -27,6 +27,8 @@ import com.example.gymapp.components.HeadingTextComponent
 import com.example.gymapp.components.MyTextFieldComponent
 import com.example.gymapp.components.NormalTextComponent
 import com.example.gymapp.components.PasswordTextFieldComponent
+import com.example.gymapp.navigator.PostOfficeAppRouter
+import com.example.gymapp.navigator.Screen
 import com.example.gymapp.signup.SignupUIEvent
 import com.example.gymapp.signup.SignupViewModel
 
