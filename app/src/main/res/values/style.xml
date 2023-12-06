@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme -->
+    <style name="Theme.GymApp" parent="">
+        <!-- Customize your theme here -->
+        <!-- You can add your theme attributes here -->
+    </style>
+
+</resources>
