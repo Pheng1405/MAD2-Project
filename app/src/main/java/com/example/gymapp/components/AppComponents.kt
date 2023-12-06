@@ -506,3 +506,19 @@ fun NavigationDrawerText(title: String, textUnit: TextUnit, color: Color) {
         )
     )
 }
+
+@Composable
+fun HeadingTextComponent(value: String) {
+    Text(
+        text = value,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(),
+        style = TextStyle(
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            fontStyle = FontStyle.Normal
+        ), color = colorResource(id = R.color.colorText),
+        textAlign = TextAlign.Center
+    )
+}
