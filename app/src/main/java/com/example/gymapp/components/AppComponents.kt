@@ -13,7 +13,9 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -25,6 +27,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -60,6 +64,7 @@ import com.example.gymapp.ui.theme.GrayColor
 import com.example.gymapp.ui.theme.Primary
 import com.example.gymapp.ui.theme.Secondary
 import com.example.gymapp.ui.theme.TextColor
+import com.example.gymapp.ui.theme.WhiteColor
 
 
 @Composable
@@ -373,5 +378,46 @@ fun ClickableLoginTextComponent(tryingToLogin: Boolean = true, onTextSelected: (
                 }
 
         },
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AppToolbar(
+    toolbarTitle: String, logoutButtonClicked: () -> Unit,
+    navigationIconClicked: () -> Unit
+) {
+
+    TopAppBar(
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Primary,
+        ),
+        title = {
+            Text(
+                text = toolbarTitle, color = WhiteColor
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = {
+                navigationIconClicked.invoke()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Menu,
+                    contentDescription = stringResource(R.string.menu),
+                    tint = WhiteColor
+                )
+            }
+
+        },
+        actions = {
+            IconButton(onClick = {
+                logoutButtonClicked.invoke()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowForward,
+                    contentDescription = stringResource(id = R.string.logout),
+                )
+            }
+        }
     )
 }
