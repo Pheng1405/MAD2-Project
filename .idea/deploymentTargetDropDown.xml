@@ -6,7 +6,20 @@
         <State />
       </entry>
       <entry key="TermsAndConditionsScreenPreview">
-        <State />
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\MSI\.android\avd\Pixel_6_Pro_API_30.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2023-12-07T11:01:04.574707200Z" />
+        </State>
       </entry>
       <entry key="app">
         <State />

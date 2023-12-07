@@ -1,4 +1,4 @@
-package com.example.gymapp.signup
+package com.example.gymapp.data.signup
 
 sealed class SignupUIEvent{
 

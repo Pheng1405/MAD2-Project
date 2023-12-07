@@ -15,13 +15,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.gymapp.R
 import com.example.gymapp.components.AppToolbar
 import com.example.gymapp.data.home.HomeViewModel
 
 
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
+fun HomeScreen(homeViewModel: HomeViewModel = viewModel(), navController: NavController) {
 
 //    val scaffoldState = rememberScaffoldState()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -69,9 +70,9 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
         }
     }
 }
-
-@Preview
-@Composable
-fun HomeScreenPreview() {
-    HomeScreen()
-}
+//
+//@Preview
+//@Composable
+//fun HomeScreenPreview() {
+//    HomeScreen()
+//}

@@ -110,12 +110,12 @@ fun MyTextFieldComponent(
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(shape = RoundedCornerShape(25.dp)),
+            .clip(shape = RoundedCornerShape(5.dp)),
         label = { Text(text = labelValue) },
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Primary,
-            focusedLabelColor = Primary,
-            cursorColor = Primary,
+            focusedBorderColor = AccentColor,
+            focusedLabelColor = AccentColor,
+            cursorColor = AccentColor,
 //            containerColor = BgColor
         ),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
@@ -154,7 +154,7 @@ fun PasswordTextFieldComponent(
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(shape = RoundedCornerShape(25.dp)),
+            .clip(shape = RoundedCornerShape(5.dp)),
         label = { Text(text = labelValue) },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Primary,

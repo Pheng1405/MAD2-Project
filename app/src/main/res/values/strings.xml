@@ -11,6 +11,7 @@
     <string name="show_password">Show password</string>
     <string name="terms_and_conditions">By continuing you accept our Privacy Policy and Term of Use</string>
     <string name="terms_and_conditions_header">Term of Use</string>
+    <string name="terms_and_conditions_text">Hello Term of User</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
     <string name="or">or</string>

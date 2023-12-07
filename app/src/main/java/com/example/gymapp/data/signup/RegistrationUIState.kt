@@ -1,4 +1,4 @@
-package com.example.gymapp.data
+package com.example.gymapp.data.signup
 
 data class RegistrationUIState(
     var firstName :String = "",

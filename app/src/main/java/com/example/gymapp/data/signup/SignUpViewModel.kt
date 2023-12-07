@@ -1,9 +1,8 @@
-package com.example.gymapp.signup
+package com.example.gymapp.data.signup
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.gymapp.data.RegistrationUIState
 import com.example.gymapp.rules.Validator
 
 class SignupViewModel : ViewModel() {

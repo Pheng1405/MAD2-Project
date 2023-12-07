@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.gymapp.R
 import com.example.gymapp.components.ButtonComponent
 import com.example.gymapp.components.CheckboxComponent
@@ -29,14 +30,14 @@ import com.example.gymapp.components.NormalTextComponent
 import com.example.gymapp.components.PasswordTextFieldComponent
 import com.example.gymapp.navigator.PostOfficeAppRouter
 import com.example.gymapp.navigator.Screen
-import com.example.gymapp.signup.SignupUIEvent
-import com.example.gymapp.signup.SignupViewModel
+import com.example.gymapp.data.signup.SignupUIEvent
+import com.example.gymapp.data.signup.SignupViewModel
 
 @Composable
-fun SignUpScreen(signupViewModel: SignupViewModel = viewModel()) {
+fun SignUpScreen(signupViewModel: SignupViewModel = viewModel(), navController: NavController) {
 
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(Color.White),
         contentAlignment = Alignment.Center
     ) {
 
@@ -46,7 +47,7 @@ fun SignUpScreen(signupViewModel: SignupViewModel = viewModel()) {
                 .background(Color.White)
                 .padding(28.dp)
         ) {
-            Column(modifier = Modifier.fillMaxSize()) {
+            Column(modifier = Modifier.fillMaxSize().background(Color.White)) {
 
                 NormalTextComponent(value = stringResource(id = R.string.hello))
                 HeadingTextComponent(value = stringResource(id = R.string.create_account))
@@ -112,7 +113,7 @@ fun SignUpScreen(signupViewModel: SignupViewModel = viewModel()) {
                 DividerTextComponent()
 
                 ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
-                    PostOfficeAppRouter.navigateTo(Screen.LoginScreen)
+                    PostOfficeAppRouter.navigateTo(Screen.SignInScreen)
                 })
             }
 
@@ -126,8 +127,8 @@ fun SignUpScreen(signupViewModel: SignupViewModel = viewModel()) {
 
 }
 
-@Preview
-@Composable
-fun DefaultPreviewOfSignUpScreen() {
-    SignUpScreen()
-}
+//@Preview
+//@Composable
+//fun DefaultPreviewOfSignUpScreen() {
+//    SignUpScreen()
+//}
