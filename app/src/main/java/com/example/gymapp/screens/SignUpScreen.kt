@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.gymapp.R
 import com.example.gymapp.components.ButtonComponent
 import com.example.gymapp.components.CheckboxComponent
@@ -35,7 +36,6 @@ import com.example.gymapp.data.signup.SignupViewModel
 
 @Composable
 fun SignUpScreen(signupViewModel: SignupViewModel = viewModel(), navController: NavController) {
-
     Box(
         modifier = Modifier.fillMaxSize().background(Color.White),
         contentAlignment = Alignment.Center
@@ -91,7 +91,7 @@ fun SignUpScreen(signupViewModel: SignupViewModel = viewModel(), navController: 
 
                 CheckboxComponent(value = stringResource(id = R.string.terms_and_conditions),
                     onTextSelected = {
-                        PostOfficeAppRouter.navigateTo(Screen.TermsAndConditionsScreen)
+                        navController.navigate(Screen.TermsAndConditionsScreen.route)
                     },
                     onCheckedChange = {
                         signupViewModel.onEvent(SignupUIEvent.PrivacyPolicyCheckBoxClicked(it))
@@ -108,12 +108,12 @@ fun SignUpScreen(signupViewModel: SignupViewModel = viewModel(), navController: 
                     isEnabled = signupViewModel.allValidationsPassed.value
                 )
 
-                Spacer(modifier = Modifier.height(20.dp))
+//                Spacer(modifier = Modifier.height(20.dp))
 
-                DividerTextComponent()
+//                DividerTextComponent()
 
                 ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
-                    PostOfficeAppRouter.navigateTo(Screen.SignInScreen)
+                    navController.navigate(Screen.SignInScreen.route)
                 })
             }
 

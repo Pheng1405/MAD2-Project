@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.gymapp.R
 import com.example.gymapp.components.ButtonComponent
 import com.example.gymapp.components.ClickableLoginTextComponent
@@ -33,7 +34,6 @@ import com.example.gymapp.navigator.Screen
 
 @Composable
 fun SignInScreen(loginViewModel: LoginViewModel = viewModel(), navController: NavController) {
-
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -90,7 +90,7 @@ fun SignInScreen(loginViewModel: LoginViewModel = viewModel(), navController: Na
 
                 DividerTextComponent()
                 ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
-                    PostOfficeAppRouter.navigateTo(Screen.SignUpScreen)
+                    navController.navigate(Screen.SignUpScreen.route)
                 })
             }
         }

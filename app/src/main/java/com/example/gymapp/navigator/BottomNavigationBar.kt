@@ -1,5 +1,6 @@
 package com.example.gymapp.navigator
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -19,6 +20,7 @@ import com.example.gymapp.screens.HomeScreen
 import com.example.gymapp.screens.SignInScreen
 import com.example.gymapp.screens.SignUpScreen
 import com.example.gymapp.screens.TermsAndConditionsScreen
+import com.example.gymapp.ui.theme.Primary
 
 @Composable
 fun BottomNavigationBar() {
@@ -26,7 +28,7 @@ fun BottomNavigationBar() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(color = Primary),
         bottomBar = {
             NavigationBar {
                 BottomNavigationItem().bottomNavigationItems().forEachIndexed { _, navigationItem ->
