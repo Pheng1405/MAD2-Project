@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.gymapp.R
@@ -34,14 +33,4 @@ fun TermsAndConditionsScreen(navController: NavController) {
             NormalTextComponent(value = stringResource(id = R.string.terms_and_conditions_text))
         }
     }
-
-//    SystemBackButtonHandler {
-////        PostOfficeAppRouter.navigateTo(Screen.SignUpScreen)
-//    }
 }
-
-//@Preview
-//@Composable
-//fun TermsAndConditionsScreenPreview(){
-//    TermsAndConditionsScreen()
-//}
