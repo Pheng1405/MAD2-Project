@@ -2,6 +2,7 @@ package com.example.gymapp.components
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
@@ -66,6 +68,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gymapp.R
+import com.example.gymapp.data.NavigationItem
 import com.example.gymapp.ui.theme.AccentColor
 import com.example.gymapp.ui.theme.BgColor
 import com.example.gymapp.ui.theme.GrayColor
@@ -451,43 +454,43 @@ fun NavigationDrawerHeader(value: String?) {
     }
 }
 
-//@Composable
-//fun NavigationDrawerBody(navigationDrawerItems: List<NavigationItem>,
-//                         onNavigationItemClicked:(NavigationItem) -> Unit) {
-//    LazyColumn(modifier = Modifier.fillMaxWidth()) {
-//
-//        items(navigationDrawerItems) {
-//            NavigationItemRow(item = it,onNavigationItemClicked)
-//        }
-//
-//    }
-//}
+@Composable
+fun NavigationDrawerBody(navigationDrawerItems: List<NavigationItem>,
+                         onNavigationItemClicked:(NavigationItem) -> Unit) {
+    LazyColumn(modifier = Modifier.fillMaxWidth()) {
 
-//@Composable
-//fun NavigationItemRow(item: NavigationItem,
-//                      onNavigationItemClicked:(NavigationItem) -> Unit) {
-//
-//
-//    Row(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .clickable {
-//                onNavigationItemClicked.invoke(item)
-//            }.padding(all = 16.dp)
-//    ) {
-//
-//        Icon(
-//            imageVector = item.icon,
-//            contentDescription = item.description,
-//        )
-//
-//        Spacer(modifier = Modifier.width(18.dp))
-//
-//        NavigationDrawerText(title = item.title, 18.sp, Primary)
-//
-//
-//    }
-//}
+        items(navigationDrawerItems) {
+            NavigationItemRow(item = it,onNavigationItemClicked)
+        }
+
+    }
+}
+
+@Composable
+fun NavigationItemRow(item: NavigationItem,
+                      onNavigationItemClicked:(NavigationItem) -> Unit) {
+
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                onNavigationItemClicked.invoke(item)
+            }.padding(all = 16.dp)
+    ) {
+
+        Icon(
+            imageVector = item.icon,
+            contentDescription = item.description,
+        )
+
+        Spacer(modifier = Modifier.width(18.dp))
+
+        NavigationDrawerText(title = item.title, 18.sp, Primary)
+
+
+    }
+}
 
 @Composable
 fun NavigationDrawerText(title: String, textUnit: TextUnit, color: Color) {
