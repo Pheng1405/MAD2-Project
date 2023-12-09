@@ -1,6 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
+//    id ("dagger.hilt.android.plugin")
+    id ("kotlin-parcelize")
+    id ("kotlinx-serialization")
+//    id ("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -70,4 +76,20 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+
+    // Retrofit && KotlinX Serialization
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+
+
+    //hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    implementation("androidx.compose.runtime:runtime-livedata:1.2.0-alpha02")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
+    annotationProcessor ("com.google.dagger:hilt-android-compiler:2.48")
 }

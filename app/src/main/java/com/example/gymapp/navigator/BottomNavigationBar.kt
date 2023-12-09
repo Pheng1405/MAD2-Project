@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.gymapp.screens.HomeScreen
+import com.example.gymapp.screens.MovieGenres.MovieGenresScreen
 import com.example.gymapp.screens.SignInScreen
 import com.example.gymapp.screens.SignUpScreen
 import com.example.gymapp.screens.TermsAndConditionsScreen
@@ -85,6 +86,12 @@ fun BottomNavigationBar() {
 
             composable(Screen.TermsAndConditionsScreen.route) {
                 TermsAndConditionsScreen(
+                    navController = navController
+                )
+            }
+
+            composable(Screen.Genres.route) {
+                MovieGenresScreen(
                     navController = navController
                 )
             }

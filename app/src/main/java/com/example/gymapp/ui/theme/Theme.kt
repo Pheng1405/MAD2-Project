@@ -68,3 +68,4 @@ fun GymAppTheme(
         content = content
     )
 }
+

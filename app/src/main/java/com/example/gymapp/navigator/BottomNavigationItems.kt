@@ -2,6 +2,7 @@ package com.example.gymapp.navigator
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Search
@@ -31,9 +32,9 @@ data class BottomNavigationItem(
             ),
 
             BottomNavigationItem(
-                label = "Test",
-                icon = Icons.Filled.AccountCircle,
-                route = Screen.Test.route
+                label = "Genres",
+                icon = Icons.Filled.DateRange,
+                route = Screen.Genres.route
             ),
 
             BottomNavigationItem(
