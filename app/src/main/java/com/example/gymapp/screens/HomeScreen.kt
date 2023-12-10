@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -87,7 +88,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel(), navController: NavCon
                     active = active,
                     onActiveChange = { active = it }
                 ) {
-
+                    Text(text = "Hello")
                 }
 
             }
