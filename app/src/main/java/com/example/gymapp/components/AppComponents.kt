@@ -38,8 +38,11 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -48,6 +51,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -69,6 +73,7 @@ import androidx.compose.ui.unit.TextUnit
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.example.gymapp.R
 import com.example.gymapp.data.NavigationItem
 import com.example.gymapp.ui.theme.AccentColor
@@ -78,6 +83,9 @@ import com.example.gymapp.ui.theme.Primary
 import com.example.gymapp.ui.theme.Secondary
 import com.example.gymapp.ui.theme.TextColor
 import com.example.gymapp.ui.theme.WhiteColor
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.ui.PlayerView
 
 
 @Composable
@@ -529,8 +537,30 @@ fun HeadingTextComponent(value: String) {
 }
 
 @Composable
+fun VideoPlayer(){
+    val sampleVideo = "https://api.mc-dragon.com/upload/video/f9389ac4-4ae5-4ec8-b9a3-0ffdb9f8ac62.m3u8"
+    val context = LocalContext.current
+    val player = SimpleExoPlayer.Builder(context).build()
+    val playerView = PlayerView(context)
+    val mediaItem = MediaItem.fromUri(sampleVideo)
+    val playWhenReady by rememberSaveable {
+        mutableStateOf(true)
+    }
+    player.setMediaItem(mediaItem)
+    playerView.player = player
+    LaunchedEffect(player) {
+        player.prepare()
+        player.playWhenReady = playWhenReady
+    }
+    AndroidView(factory = {
+        playerView
+    })
+}
+
+@Composable
 fun Test(category : String ){
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(text = category)
     }
 }
+

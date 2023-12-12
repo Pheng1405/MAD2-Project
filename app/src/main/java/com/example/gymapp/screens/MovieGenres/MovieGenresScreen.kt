@@ -32,6 +32,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.gymapp.R
 import com.example.gymapp.components.Test
+import com.example.gymapp.components.VideoPlayer
 import com.example.gymapp.domain.model.MovieGenres
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -80,9 +81,13 @@ fun MovieGenresScreen(
                         )
                     }
                 }
+
+
+
                 categories.toSet().forEach { category ->
 //                    val routeDetails = Screen.Detail.route + "/{$DETAIL_ARGUMENT_KEY}"
                     item {
+                        VideoPlayer()
                         state.category?.let {
                             Test(
                                 category = category,
