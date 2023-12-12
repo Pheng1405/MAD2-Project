@@ -133,7 +133,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel(), navController: NavCon
                             Icon(
                                 modifier = Modifier.padding(end = 10.dp),
                                 imageVector = Icons.Default.ArrowForward,
-                                contentDescription = "Arrow Icon"
+                                contentDescription = "History Icon"
                             )
                             Text(text = it)
                         }
