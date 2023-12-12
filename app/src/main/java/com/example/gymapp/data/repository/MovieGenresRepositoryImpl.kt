@@ -1,8 +1,9 @@
 package com.example.gymapp.data.repository
 
 import com.example.gymapp.data.remote.MovieGenresApi
-import com.example.gymapp.domain.MovieGenresRepository
+import com.example.gymapp.domain.MovieRepository
 import com.example.gymapp.domain.model.AllMovieGenres
+import com.example.gymapp.domain.model.MovieModel
 import com.example.gymapp.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val movieGenresApi: MovieGenresApi,
-) : MovieGenresRepository {
+) : MovieRepository {
 
 
     override suspend fun getAllMovieGenres(): Flow<Resource<AllMovieGenres>> = flow {
@@ -30,6 +31,10 @@ class MovieRepositoryImpl @Inject constructor(
                 message = e.message.toString(),
             ))
         }
+    }
+
+    override suspend fun getOneMovie(): Flow<Resource<MovieModel>> {
+        TODO("Not yet implemented")
     }
 
 

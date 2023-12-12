@@ -95,5 +95,8 @@ dependencies {
 
 
     //exo player
-    implementation("com.google.android.exoplayer:exoplayer:2.14.1")
+    implementation("com.google.android.exoplayer:exoplayer:2.15.1")
+
+    // coil
+    implementation("io.coil-kt:coil-compose:1.4.0")
 }

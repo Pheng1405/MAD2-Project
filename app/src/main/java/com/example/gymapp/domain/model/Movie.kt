@@ -3,7 +3,7 @@ package com.example.gymapp.domain.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data  class Movie (
+data  class MovieModel (
     val id : String,
     val title : String,
     val description : String,

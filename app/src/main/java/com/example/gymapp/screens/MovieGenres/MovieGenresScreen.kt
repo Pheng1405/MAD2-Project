@@ -31,9 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.gymapp.R
+import com.example.gymapp.components.MovieGenresContainer
 import com.example.gymapp.components.Test
-import com.example.gymapp.components.VideoPlayer
-import com.example.gymapp.domain.model.MovieGenres
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
@@ -82,15 +81,14 @@ fun MovieGenresScreen(
                     }
                 }
 
-
-
                 categories.toSet().forEach { category ->
 //                    val routeDetails = Screen.Detail.route + "/{$DETAIL_ARGUMENT_KEY}"
                     item {
-                        VideoPlayer()
                         state.category?.let {
-                            Test(
-                                category = category,
+                            MovieGenresContainer(
+                                title = category,
+                                imageUrl = "https://cdn.pixabay.com/photo/2019/03/28/22/23/link-4088190_1280.png",
+                                description =  category
                             )
                         }
                     }

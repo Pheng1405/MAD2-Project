@@ -22,7 +22,7 @@ class MovieGenresViewModel @Inject constructor(
     private val useCases: UseCases,
 ) : ViewModel() {
 
-    private val viewModelState = MutableStateFlow(ShopViewModelState())
+    private val viewModelState = MutableStateFlow(MovieGenresModelState())
     val uiState = viewModelState
         .map { it.toUiState() }
         .stateIn(

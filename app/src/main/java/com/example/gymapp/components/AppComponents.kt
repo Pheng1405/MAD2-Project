@@ -1,9 +1,10 @@
 package com.example.gymapp.components
 
+import android.net.Uri
 import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,6 +25,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -34,14 +36,18 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,9 +57,12 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -67,6 +76,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 //import androidx.compose.material.icons.filled.Visibility
 //import androidx.compose.material.icons.filled.VisibilityOff
@@ -74,6 +84,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import com.example.gymapp.R
 import com.example.gymapp.data.NavigationItem
 import com.example.gymapp.ui.theme.AccentColor
@@ -83,9 +95,14 @@ import com.example.gymapp.ui.theme.Primary
 import com.example.gymapp.ui.theme.Secondary
 import com.example.gymapp.ui.theme.TextColor
 import com.example.gymapp.ui.theme.WhiteColor
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.MediaItem.fromUri
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.ui.StyledPlayerView
+import coil.compose.rememberImagePainter
 
 
 @Composable
@@ -536,26 +553,28 @@ fun HeadingTextComponent(value: String) {
     )
 }
 
-@Composable
-fun VideoPlayer(){
-    val sampleVideo = "https://api.mc-dragon.com/upload/video/f9389ac4-4ae5-4ec8-b9a3-0ffdb9f8ac62.m3u8"
-    val context = LocalContext.current
-    val player = SimpleExoPlayer.Builder(context).build()
-    val playerView = PlayerView(context)
-    val mediaItem = MediaItem.fromUri(sampleVideo)
-    val playWhenReady by rememberSaveable {
-        mutableStateOf(true)
-    }
-    player.setMediaItem(mediaItem)
-    playerView.player = player
-    LaunchedEffect(player) {
-        player.prepare()
-        player.playWhenReady = playWhenReady
-    }
-    AndroidView(factory = {
-        playerView
-    })
-}
+
+//@Composable
+//fun VideoPlayer(){
+//    val sampleVideo = "https://api.mc-dragon.com/upload/video/795687a4-8f67-46ac-8098-365f6c959114.m3u8"
+//    val context = LocalContext.current
+//    val player = SimpleExoPlayer.Builder(context).build()
+//    val playerView = PlayerView(context)
+//    val mediaItem = MediaItem.fromUri(sampleVideo)
+//    val playWhenReady by rememberSaveable {
+//        mutableStateOf(true)
+//    }
+//    player.setMediaItem(mediaItem)
+//    playerView.player = player
+//    LaunchedEffect(player) {
+//        player.prepare()
+//        player.playWhenReady = playWhenReady
+//
+//    }
+//    AndroidView(factory = {
+//        playerView
+//    })
+//}
 
 @Composable
 fun Test(category : String ){
@@ -564,3 +583,70 @@ fun Test(category : String ){
     }
 }
 
+
+
+
+@Composable
+fun MovieGenresContainer(
+    title: String,
+    description: String,
+    imageUrl: String,
+    onDetailButtonClick: () -> Unit = {}
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .background(MaterialTheme.colorScheme.surface)
+            .clip(MaterialTheme.shapes.medium)
+            .clickable { onDetailButtonClick.invoke() }
+    ) {
+        // Movie Image
+        Image(
+            painter = rememberImagePainter(imageUrl),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .clip(MaterialTheme.shapes.medium)
+        )
+
+        // Title
+        Text(
+            text = title,
+            style = MaterialTheme.typography.headlineMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier
+                .padding(16.dp)
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
+                .clip(MaterialTheme.shapes.medium)
+        )
+
+        // Description
+        Text(
+            text = description,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
+                .clip(MaterialTheme.shapes.medium)
+        )
+
+        // Detail Button
+        IconButton(
+            onClick = { onDetailButtonClick.invoke() },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(16.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.PlayArrow,
+                contentDescription = "Detail",
+                tint = MaterialTheme.colorScheme.onSurface
+            )
+        }
+    }
+}

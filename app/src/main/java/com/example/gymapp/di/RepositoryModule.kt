@@ -2,8 +2,9 @@ package com.example.gymapp.di
 
 import com.example.gymapp.data.remote.MovieGenresApi
 import com.example.gymapp.data.repository.MovieRepositoryImpl
-import com.example.gymapp.domain.MovieGenresRepository
+import com.example.gymapp.domain.MovieRepository
 import com.example.gymapp.domain.use_case.GetAllMovieGenresUseCase
+import com.example.gymapp.domain.use_case.GetOneMovieUseCase
 import com.example.gymapp.domain.use_case.UseCases
 import dagger.Module
 import dagger.Provides
@@ -17,14 +18,15 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMovieRepository(movieGenresApi: MovieGenresApi): MovieGenresRepository {
+    fun provideMovieRepository(movieGenresApi: MovieGenresApi): MovieRepository {
         return MovieRepositoryImpl(movieGenresApi)
     }
 
     @Provides
     @Singleton
-    fun provideUseCases(repository: MovieGenresRepository): UseCases =
+    fun provideUseCases(repository: MovieRepository): UseCases =
         UseCases(
             getAllMovieGenresUseCase = GetAllMovieGenresUseCase(repository = repository),
+            getOneMovieDetailUseCase = GetOneMovieUseCase(repository = repository)
         )
 }
