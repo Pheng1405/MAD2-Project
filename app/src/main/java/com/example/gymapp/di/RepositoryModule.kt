@@ -3,7 +3,6 @@ package com.example.gymapp.di
 import com.example.gymapp.data.remote.MovieGenresApi
 import com.example.gymapp.data.repository.MovieRepositoryImpl
 import com.example.gymapp.domain.MovieGenresRepository
-import com.example.gymapp.domain.model.MovieGenres
 import com.example.gymapp.domain.use_case.GetAllMovieGenresUseCase
 import com.example.gymapp.domain.use_case.UseCases
 import dagger.Module
