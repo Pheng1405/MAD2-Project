@@ -2,7 +2,10 @@ package com.example.gymapp.domain.use_case
 
 data class UseCases(
     val getAllMovieGenresUseCase: GetAllMovieGenresUseCase,
-    val getOneMovieDetailUseCase: GetOneMovieUseCase,
+
+    val getOneMovieGenresUseCase: GetOneMovieGenresUseCase,
+//    val getOneMovieDetailUseCase: GetOneMovieUseCase,
+
 //    val getCartUseCase: GetCartUseCase,
 //    val getCartUseCase: GetCartUseCase,
 //    val getAllProductsUseCase: GetAllProductsUseCase,

@@ -3,7 +3,7 @@ package com.example.gymapp.data.repository
 import com.example.gymapp.data.remote.MovieGenresApi
 import com.example.gymapp.domain.MovieRepository
 import com.example.gymapp.domain.model.AllMovieGenres
-import com.example.gymapp.domain.model.MovieModel
+import com.example.gymapp.domain.model.MovieGenres
 import com.example.gymapp.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -33,9 +33,42 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getOneMovie(): Flow<Resource<MovieModel>> {
-        TODO("Not yet implemented")
+
+    override suspend fun getOneMovieGenresById(id: String): Flow<Resource<MovieGenres>> = flow {
+        emit(Resource.Loading())
+        try {
+            val response = movieGenresApi.getOneMovieGenres(id)
+            emit(Resource.Success(data = response))
+        } catch (e: HttpException) {
+            emit(Resource.Error(
+                message = e.message.toString(),
+            ))
+
+        } catch (e: IOException) {
+            emit(Resource.Error(
+                message = e.message.toString(),
+            ))
+        }
     }
+
+
+//    override suspend fun getOneMovie(id: String): Flow<Resource<MovieGenres>> = flow {
+//        emit(Resource.Loading())
+//        try {
+//            val response = movieGenresApi.getOneMovieGenres(id)
+//            emit(Resource.Success(data = response))
+//        } catch (e: HttpException) {
+//            emit(Resource.Error(
+//                message = e.message.toString(),
+//            ))
+//
+//        } catch (e: IOException) {
+//            emit(Resource.Error(
+//                message = e.message.toString(),
+//            ))
+//        }
+//    }
+
 
 
 //    override suspend fun login(authToken: String): FUser {

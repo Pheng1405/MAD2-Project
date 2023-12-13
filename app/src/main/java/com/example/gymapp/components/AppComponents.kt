@@ -86,6 +86,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.navigation.NavController
 import com.example.gymapp.R
 import com.example.gymapp.data.NavigationItem
 import com.example.gymapp.ui.theme.AccentColor
@@ -103,6 +104,8 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import coil.compose.rememberImagePainter
+import com.example.gymapp.domain.model.MovieGenres
+import com.example.gymapp.navigator.Screen
 
 
 @Composable
@@ -588,9 +591,8 @@ fun Test(category : String ){
 
 @Composable
 fun MovieGenresContainer(
-    title: String,
-    description: String,
-    imageUrl: String,
+    movieGenres: MovieGenres,
+    navController: NavController,
     onDetailButtonClick: () -> Unit = {}
 ) {
     Box(
@@ -599,22 +601,22 @@ fun MovieGenresContainer(
             .padding(16.dp)
             .background(MaterialTheme.colorScheme.surface)
             .clip(MaterialTheme.shapes.medium)
-            .clickable { onDetailButtonClick.invoke() }
     ) {
         // Movie Image
         Image(
-            painter = rememberImagePainter(imageUrl),
+            painter = rememberImagePainter("https://wallpapers.com/images/featured-full/avengers-vm16xv4a69smdauy.jpg"),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
                 .clip(MaterialTheme.shapes.medium)
+                .clickable { onDetailButtonClick.invoke() }
         )
 
         // Title
         Text(
-            text = title,
+            text = movieGenres.name,
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSurface,
@@ -622,22 +624,28 @@ fun MovieGenresContainer(
                 .padding(16.dp)
                 .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
                 .clip(MaterialTheme.shapes.medium)
+                .clickable { onDetailButtonClick.invoke() }
         )
 
         // Description
         Text(
-            text = description,
+
+            text = "DESCRIPTION",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
                 .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
                 .clip(MaterialTheme.shapes.medium)
+                .clickable { onDetailButtonClick.invoke() }
         )
 
         // Detail Button
         IconButton(
-            onClick = { onDetailButtonClick.invoke() },
+            onClick = {
+                println("${movieGenres.id}")
+                navController.navigate(Screen.GenresDetail.route+"/${movieGenres.id}")
+            },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(16.dp)
@@ -650,3 +658,72 @@ fun MovieGenresContainer(
         }
     }
 }
+
+
+
+//WHEN API DONE ENABLE THIS
+//@Composable
+//fun MovieGenresContainer(
+//    movieGenres: MovieGenres,
+//    onDetailButtonClick: () -> Unit = {}
+//) {
+//    Box(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(16.dp)
+//            .background(MaterialTheme.colorScheme.surface)
+//            .clip(MaterialTheme.shapes.medium)
+//            .clickable { onDetailButtonClick.invoke() }
+//    ) {
+//        // Movie Image
+//        Image(
+//            //replace
+////            painter = rememberImagePainter(movieGenres.thumbnail),
+//            painter = rememberImagePainter(movieGenres.thumbnail),
+//            contentDescription = null,
+//            contentScale = ContentScale.Crop,
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(200.dp)
+//                .clip(MaterialTheme.shapes.medium)
+//        )
+//
+//        // Title
+//        Text(
+//            text = movieGenres.name,
+////            text = "Movie Name",
+//            style = MaterialTheme.typography.headlineMedium,
+//            fontWeight = FontWeight.Bold,
+//            color = MaterialTheme.colorScheme.onSurface,
+//            modifier = Modifier
+//                .padding(16.dp)
+//                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
+//                .clip(MaterialTheme.shapes.medium)
+//        )
+//
+//        // Description
+//        Text(
+//            text = movieGenres.description,
+//            style = MaterialTheme.typography.bodyMedium,
+//            color = MaterialTheme.colorScheme.onSurface,
+//            modifier = Modifier
+//                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+//                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.8f))
+//                .clip(MaterialTheme.shapes.medium)
+//        )
+//
+//        // Detail Button
+//        IconButton(
+//            onClick = { onDetailButtonClick.invoke() },
+//            modifier = Modifier
+//                .align(Alignment.BottomEnd)
+//                .padding(16.dp)
+//        ) {
+//            Icon(
+//                imageVector = Icons.Default.PlayArrow,
+//                contentDescription = "Detail",
+//                tint = MaterialTheme.colorScheme.onSurface
+//            )
+//        }
+//    }
+//}

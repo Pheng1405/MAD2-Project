@@ -5,7 +5,12 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
+
 interface MovieGenresApi{
     @GET("/video-category/all")
     suspend fun getAllMovieGenres(): AllMovieGenres
+
+    @GET("/video-category/one/{id}")
+    suspend fun getOneMovieGenres(@Path("id") id: String): MovieGenres
 }

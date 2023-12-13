@@ -33,6 +33,7 @@ import androidx.navigation.NavHostController
 import com.example.gymapp.R
 import com.example.gymapp.components.MovieGenresContainer
 import com.example.gymapp.components.Test
+import com.example.gymapp.domain.model.MovieGenres
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
@@ -47,9 +48,9 @@ fun MovieGenresScreen(
     )
 
     val state by movieGenresViewModel.uiState.collectAsState()
-    val categories = ArrayList<String>()
+    val categories = ArrayList<MovieGenres>()
     state.category?.forEach { item ->
-        categories.add(item.name)
+        categories.add(item)
     }
 //    var searchItem by remember { mutableStateOf("") }
 
@@ -69,31 +70,18 @@ fun MovieGenresScreen(
                     .fillMaxHeight(0.9f)
             ) {
                 if (state.category?.isNotEmpty() == true) {
-                    item {
-                        Image(
-                            painter = painterResource(id = R.drawable.baseline_visibility_24),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 8.dp, horizontal = 16.dp),
-                            contentScale = ContentScale.FillBounds
-                        )
-                    }
-                }
-
-                categories.toSet().forEach { category ->
+                    categories.toSet().forEach { category ->
 //                    val routeDetails = Screen.Detail.route + "/{$DETAIL_ARGUMENT_KEY}"
-                    item {
-                        state.category?.let {
-                            MovieGenresContainer(
-                                title = category,
-                                imageUrl = "https://cdn.pixabay.com/photo/2019/03/28/22/23/link-4088190_1280.png",
-                                description =  category
-                            )
+                        item {
+                            state.category?.let {
+                                MovieGenresContainer(
+                                    category,
+                                    navController
+                                )
+                            }
                         }
                     }
                 }
-
             }
             if (state.error.isNotBlank()) {
                 Text(

@@ -18,6 +18,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.gymapp.screens.HomeScreen
 import com.example.gymapp.screens.MovieGenres.MovieGenresScreen
+import com.example.gymapp.screens.MovieGenresDetail.MovieGenresDetailScreen
 import com.example.gymapp.screens.SignInScreen
 import com.example.gymapp.screens.SignUpScreen
 import com.example.gymapp.screens.TermsAndConditionsScreen
@@ -29,7 +30,9 @@ fun BottomNavigationBar() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     Scaffold(
-        modifier = Modifier.fillMaxSize().background(color = Primary),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Primary),
         bottomBar = {
             NavigationBar {
                 BottomNavigationItem().bottomNavigationItems().forEachIndexed { _, navigationItem ->
@@ -95,6 +98,14 @@ fun BottomNavigationBar() {
                     navController = navController
                 )
             }
+
+            composable("${Screen.GenresDetail.route}/{id}") { backStackEntry ->
+                val id = backStackEntry.arguments?.getString("id")
+                MovieGenresDetailScreen(
+                    navController = navController,
+                )
+            }
+
         }
     }
 }
