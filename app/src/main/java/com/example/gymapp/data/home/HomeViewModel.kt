@@ -8,6 +8,13 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.gymapp.data.NavigationItem
+import com.example.gymapp.data.remote.MovieGenresApi
+import com.example.gymapp.domain.model.MovieGenres
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class HomeViewModel : ViewModel() {
 
@@ -35,6 +42,9 @@ class HomeViewModel : ViewModel() {
     )
 
     val isUserLoggedIn: MutableLiveData<Boolean> = MutableLiveData()
+
+
+
 
 //    fun logout() {
 //

@@ -4,20 +4,20 @@ import com.example.gymapp.domain.model.MovieGenres
 
 data class MovieGenresDetailScreenState(
     val isLoading: Boolean,
-    val genres: MovieGenres? = null,
+    val data: MovieGenres?,
     val error: String,
 ){
     fun toUiState() = MovieGenresDetailScreenState(
-        isLoading, genres, error
+        isLoading, data, error
     )
 }
 
 data class MovieGenresDetailModelState(
     val isLoading: Boolean = false,
-    val genres: MovieGenres? = null,
+    val data: MovieGenres? = null,
     val error: String = "",
 ) {
     fun toUiState() = MovieGenresDetailModelState(
-        isLoading, genres, error
+        isLoading, data, error
     )
 }

@@ -1,5 +1,6 @@
 package com.example.gymapp.screens.MovieGenres
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gymapp.domain.model.AllMovieGenres
@@ -40,12 +41,22 @@ class MovieGenresViewModel @Inject constructor(
             useCases.getAllMovieGenresUseCase().onEach { result ->
                 viewModelState.update { state ->
                     when (result) {
-                        is Resource.Success -> state.copy(category = result.data?.data,
-                            isLoading = false,
-                            error = "")
-                        is Resource.Error -> state.copy(error = result.message
-                            ?: "An error occurred", category = emptyList(), isLoading = false)
-                        is Resource.Loading -> state.copy(isLoading = true, error = "")
+                        is Resource.Success -> {
+                            Log.d("tag", result.data!!.data.toString());
+                            Log.i(result.data!!.data[0].name, "sucess")
+                            state.copy(
+                                category = result.data?.data,
+                                isLoading = false,
+                                error = "")
+                        }
+                        is Resource.Error -> {
+                            println(result)
+                            state.copy(error = result.message
+                                ?: "An error occurred", category = emptyList(), isLoading = false)
+                        }
+                        is Resource.Loading -> {
+                            state.copy(isLoading = true, error = "")
+                        }
                     }
                 }
             }.launchIn(this)

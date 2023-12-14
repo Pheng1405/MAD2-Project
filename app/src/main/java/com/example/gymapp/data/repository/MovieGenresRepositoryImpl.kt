@@ -4,6 +4,7 @@ import com.example.gymapp.data.remote.MovieGenresApi
 import com.example.gymapp.domain.MovieRepository
 import com.example.gymapp.domain.model.AllMovieGenres
 import com.example.gymapp.domain.model.MovieGenres
+import com.example.gymapp.domain.model.MovieGenresDto
 import com.example.gymapp.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -34,7 +35,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun getOneMovieGenresById(id: String): Flow<Resource<MovieGenres>> = flow {
+    override suspend fun getOneMovieGenresById(id: String): Flow<Resource<MovieGenresDto>> = flow {
         emit(Resource.Loading())
         try {
             val response = movieGenresApi.getOneMovieGenres(id)

@@ -34,6 +34,7 @@ class MovieDetailViewModel @Inject constructor(
     private fun getOneMovieDetail() {
         viewModelScope.launch {
             useCases.getOneMovieGenresUseCase("").onEach { result ->
+
 //                viewModelState.update { state ->
 //                    when (result) {
 //                        is Resource.Success -> state.copy(data = result.data.,

@@ -9,10 +9,10 @@ data  class MovieGenres (
 )
 
 
-//@Serializable
-//data  class MovieGenresDto (
-//    val data : MovieGenres,
-//)
+@Serializable
+data  class MovieGenresDto (
+    val data : MovieGenres,
+)
 //@Serializable
 //data  class MovieGenres (
 //    val id : String?,

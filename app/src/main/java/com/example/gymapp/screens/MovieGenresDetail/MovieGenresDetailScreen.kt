@@ -23,7 +23,7 @@ fun MovieGenresDetailScreen (
     )
 
     val state by movieGenresDetailViewModel.uiState.collectAsState()
-    val genresDetail = state.genres;
+    val genresDetail = state.data;
 
     if (genresDetail != null) {
         Text(text = genresDetail.name)
