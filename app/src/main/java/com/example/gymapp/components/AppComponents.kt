@@ -39,9 +39,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.ShapeDefaults.Medium
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
@@ -60,6 +63,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -511,7 +515,8 @@ fun NavigationItemRow(item: NavigationItem,
             .fillMaxWidth()
             .clickable {
                 onNavigationItemClicked.invoke(item)
-            }.padding(all = 16.dp)
+            }
+            .padding(all = 16.dp)
     ) {
 
         Icon(
@@ -850,6 +855,98 @@ fun MovieCard(
                     contentDescription = null
                 )
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SmallMovieCard(
+    movieGenres: MovieGenres,
+    modifier: Modifier
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.padding(bottom = 16.dp)
+    ) {
+        Card(
+//            shape = Shapes.large,
+
+            modifier = Modifier
+                .width(100.dp)
+                .height(100.dp)
+                .background(color = DarkGray)
+                .padding(bottom = 8.dp)
+        ) {
+            Image(
+                painter = rememberImagePainter("https://wallpapers.com/images/featured-full/avengers-vm16xv4a69smdauy.jpg"),
+                contentDescription = null,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+        Text(text = movieGenres.name, modifier = Modifier.width(100.dp), fontSize = 14.sp)
+        Text(text = movieGenres.name, color = DarkGray, modifier = Modifier.width(100.dp), fontSize = 14.sp)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MovieLargeContainer(
+) {
+
+    Box(
+        modifier = Modifier
+            .clip(shape = RoundedCornerShape(30.dp))
+            .background(color = Color.DarkGray),
+        contentAlignment = Alignment.Center
+    ) {
+
+        Row(
+            modifier = Modifier
+                .padding(start = 20.dp)
+                .padding(top = 25.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Column(Modifier.width(150.dp)) {
+                Text(
+                    modifier = Modifier.padding(bottom = 10.dp).size(20.dp),
+                    text = "Avengers: Endgame (2019)",
+                    color = Color.Black,
+//                    fontSize = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold
+                )
+
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.textButtonColors(
+                       Color.White
+                    ),
+                    shape = RoundedCornerShape(10.dp)
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.menu),
+                        color = colorResource(id = R.color.colorGray)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(180.dp))
+
+                Text(
+                    text = "Hi",
+                    color = Color.Black,
+//                    fontSize = MaterialTheme.typography.headlineSmall,
+                    modifier = Modifier.padding(bottom = 50.dp)
+                )
+            }
+
+            //Tennis Player Image
+            Image(
+                painter = rememberImagePainter("https://wallpapers.com/images/featured-full/avengers-vm16xv4a69smdauy.jpg"),
+                modifier = Modifier.width(300.dp),
+                contentDescription = "A poster image of a tennis player",
+                contentScale = ContentScale.FillBounds
+            )
         }
     }
 }
