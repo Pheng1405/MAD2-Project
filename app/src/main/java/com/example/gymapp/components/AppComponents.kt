@@ -27,6 +27,7 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Favorite
@@ -1086,4 +1087,33 @@ fun RecommendationCard(recommendation: Recommendation) {
         )
     }
 }
+
+
+//HOME SCREEN DETAIL COMPONENT
+
+@Preview
+@Composable
+fun GreetingSection(username: String = "Pheng") {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "Hello $username",
+            style = TextStyle(fontSize = 24.sp, color = Color.White)
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        Icon(
+            imageVector = Icons.Default.AccountCircle,
+            contentDescription = "Profile",
+            tint = Color.White,
+            modifier = Modifier.size(48.dp)
+        )
+    }
+}
+
+
+
 
