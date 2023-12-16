@@ -22,7 +22,9 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -61,6 +63,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -1114,6 +1117,28 @@ fun GreetingSection(username: String = "Pheng") {
     }
 }
 
+@Preview
+@Composable
+fun SearchBar(hint: String = "What to Watch?") {
+    var text by rememberSaveable { mutableStateOf("") }
 
+    BasicTextField(
+        value = text,
+        onValueChange = { text = it },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .background(Color.White, shape = CircleShape)
+            .padding(horizontal = 20.dp, vertical = 12.dp),
+        decorationBox = { innerTextField ->
+            Row(Modifier.fillMaxWidth()) {
+                if (text.isEmpty()) {
+                    Text(hint, style = TextStyle(color = Color.LightGray, fontSize = 16.sp))
+                }
+                innerTextField()
+            }
+        }
+    )
+}
 
 
