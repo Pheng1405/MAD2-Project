@@ -36,6 +36,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -1117,6 +1118,7 @@ fun GreetingSection(username: String = "Pheng") {
     }
 }
 
+//Search Bar Above the movie Section
 @Preview
 @Composable
 fun SearchBar(hint: String = "What to Watch?") {
@@ -1140,5 +1142,51 @@ fun SearchBar(hint: String = "What to Watch?") {
         }
     )
 }
+
+//Movie Section
+
+//@Composable
+//fun MovieSection(title: String, movies: List<Movie>) {
+//    Column(modifier = Modifier.fillMaxWidth()) {
+//        Text(
+//            text = title,
+//            style = TextStyle(fontSize = 18.sp, color = Color.White),
+//            modifier = Modifier.padding(16.dp)
+//        )
+//        LazyRow {
+//            items(movies) { movie ->
+//                MovieCard(movie)
+//            }
+//        }
+//    }
+//}
+
+@Preview
+@Composable
+fun MovieCard() {
+    Card(
+        shape = MaterialTheme.shapes.medium,
+        modifier = Modifier
+            .padding(8.dp)
+            .size(120.dp, 180.dp)
+    ) {
+        Column {
+            Image(
+                painter = rememberImagePainter("https://media-cache.cinematerial.com/p/500x/sg7wyd4e/dc-league-of-super-pets-british-movie-poster.jpg?v=1654282333"),
+                contentDescription = "Movie Poster",
+                contentScale = ContentScale.Crop
+            )
+            Text("Movie Title", style = TextStyle(color = Color.White, fontSize = 12.sp))
+            Text("Movie Genre", style = TextStyle(color = Color.Gray, fontSize = 10.sp))
+            Row {
+                Icon(Icons.Default.Star, contentDescription = "Rating", tint = Color.Yellow)
+                Text("4.5", style = TextStyle(color = Color.White, fontSize = 12.sp))
+            }
+        }
+    }
+}
+
+
+
 
 
