@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
@@ -28,8 +29,10 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -950,3 +953,137 @@ fun MovieLargeContainer(
         }
     }
 }
+
+@Preview
+@ExperimentalMaterial3Api
+@Composable
+fun MovieDetailScreen() {
+    Column(modifier = Modifier.fillMaxSize()) {
+        TopAppBar(
+            title = { Text("Movie Details") },
+            modifier = Modifier.background(color = Color.Black),
+
+            )
+
+        // Movie poster and play button
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(250.dp)
+        ) {
+            Image(
+                painter = rememberImagePainter("https://wallpapers.com/images/featured-full/avengers-vm16xv4a69smdauy.jpg"),
+                contentDescription = "Movie Poster",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+            IconButton(
+                onClick = { /* TODO: Handle play movie */ },
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .size(48.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.PlayArrow,
+                    contentDescription = "Play",
+                    tint = Color.White,
+                    modifier = Modifier.size(48.dp)
+                )
+            }
+        }
+
+        // Movie title and actions
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Doctor Strange 2",
+                style = TextStyle(fontSize = 24.sp, color = Color.White)
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            IconButton(onClick = { /* TODO: Handle favorite */ }) {
+                Icon(Icons.Default.Favorite, contentDescription = "Like")
+            }
+            IconButton(onClick = { /* TODO: Handle share */ }) {
+                Icon(Icons.Default.Share, contentDescription = "Share")
+            }
+        }
+
+        // Movie description
+        Text(
+            text = "This is the sample description of the movie...",
+            modifier = Modifier.padding(16.dp),
+            color = Color.Gray
+        )
+
+        // Recommended section
+        Text(
+            text = "Recommended",
+            modifier = Modifier.padding(16.dp),
+            style = TextStyle(fontSize = 18.sp, color = Color.White)
+        )
+        LazyRow {
+            items(recommendations) { recommendation ->
+                Card(
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .size(120.dp, 180.dp)
+                ) {
+                    Image(
+                        painter = rememberImagePainter(recommendation.imageRes),
+                        contentDescription = "Recommended Movie",
+                        contentScale = ContentScale.Crop
+                    )
+                }
+            }
+        }
+    }
+}
+
+// Dummy data for recommendations, replace with real data
+val recommendations = listOf(
+    Recommendation(imageRes = R.drawable.baseline_textsms_24),
+    Recommendation(imageRes = R.drawable.baseline_textsms_24),
+    Recommendation(imageRes = R.drawable.baseline_textsms_24)
+)
+
+data class Recommendation(val imageRes: Int)
+
+
+// Movie Detail Screen Component Section
+
+// Will pass a list of movie id, thumbnail, title as parameters
+@Composable
+fun RecommendedSection(recommendations: List<Recommendation>) {
+    Text(
+        text = "Recommended",
+        modifier = Modifier.padding(16.dp),
+        style = TextStyle(fontSize = 18.sp, color = Color.White)
+    )
+    LazyRow {
+        items(recommendations) { recommendation ->
+            RecommendationCard(recommendation)
+        }
+    }
+}
+// Will pass movie id, thumbnail, title as parameters
+@Composable
+fun RecommendationCard(recommendation: Recommendation) {
+    Card(
+        shape = RoundedCornerShape(8.dp),
+        modifier = Modifier
+            .padding(8.dp)
+            .size(120.dp, 180.dp)
+    ) {
+        Image(
+            painter = painterResource(id = recommendation.imageRes),
+            contentDescription = "Recommended Movie",
+            contentScale = ContentScale.Crop
+        )
+    }
+}
+
