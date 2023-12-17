@@ -22,5 +22,7 @@ buildscript {
         classpath("com.google.dagger:hilt-android-gradle-plugin:$hilt_version")
         classpath("com.google.gms:google-services:4.3.10")
         classpath("org.jetbrains.kotlin:kotlin-serialization:1.6.10")
+
+        implementation 'io.coil-kt:coil-compose:1.3.2'
     }
 }
