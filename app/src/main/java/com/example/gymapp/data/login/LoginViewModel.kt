@@ -2,6 +2,7 @@ package com.example.gymapp.data.login
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gymapp.data.remote.MovieGenresApi
@@ -17,6 +18,9 @@ class LoginViewModel : ViewModel() {
     var allValidationsPassed = mutableStateOf(false)
 
     var loginInProgress = mutableStateOf(false)
+
+
+    var loginError = MutableLiveData<String?>()
 
 
     fun onEvent(event: LoginUIEvent) {
@@ -72,9 +76,7 @@ class LoginViewModel : ViewModel() {
             .build()
         val service = retrofit.create(MovieGenresApi::class.java)
 
-        Log.i("Click", "Clicked")
         viewModelScope.launch {
-            Log.i("View Model Scope", "Clicked")
 
             try {
                 val result = service.siginIn(signInDto)
@@ -82,6 +84,7 @@ class LoginViewModel : ViewModel() {
                 println("MovieGenres: ${result.data}")
                 loginInProgress.value = false
             } catch (e: Exception) {
+                loginError.value = "Login failed: Invalid email or password"
                 println("Error: ${e.message}")
         }
 
