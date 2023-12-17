@@ -1,6 +1,5 @@
 package com.example.gymapp.components
 
-import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -53,19 +52,14 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.ShapeDefaults.Medium
-import androidx.compose.material3.Shapes
 import androidx.compose.material3.Surface
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -75,13 +69,10 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -104,9 +95,6 @@ import androidx.compose.ui.unit.TextUnit
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
 import androidx.navigation.NavController
 import com.example.gymapp.R
 import com.example.gymapp.data.NavigationItem
@@ -117,15 +105,9 @@ import com.example.gymapp.ui.theme.Primary
 import com.example.gymapp.ui.theme.Secondary
 import com.example.gymapp.ui.theme.TextColor
 import com.example.gymapp.ui.theme.WhiteColor
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.MediaItem.fromUri
-import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
-import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.ui.StyledPlayerView
 import coil.compose.rememberImagePainter
 import com.example.gymapp.domain.model.MovieGenres
+import com.example.gymapp.domain.model.MovieModel
 import com.example.gymapp.navigator.Screen
 
 
@@ -1232,6 +1214,7 @@ fun UpcomingMoviesComponent(
             Text(
                 text = "Upcoming Movies",
                 fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier.clickable { /* Handle upcoming movies click */ },
                 style = TextStyle(color = Color.White, fontSize = 12.sp)
             )
@@ -1257,9 +1240,111 @@ fun UpcomingMoviesComponent(
                     modifier = Modifier
                         .size(width = 300.dp, height = 180.dp)
                         .padding(end = 8.dp)
+                        .clip(RoundedCornerShape(12.dp))
                         .clickable { onMoviePosterClicked(index) },
                     contentScale = ContentScale.Crop
                 )
+            }
+        }
+    }
+}
+
+@Composable
+fun MovieItem(movie: MovieModel, onMovieClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .width(180.dp)
+            .height(340.dp)
+            .padding(horizontal = 4.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(color = Color.Black)
+    ) {
+        Image(
+            painter = rememberImagePainter(
+                data = movie.imageUrl,
+                builder = {
+                    crossfade(true)
+                }
+            ),
+            contentDescription = "Movie Poster",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+            contentAlignment = Alignment.BottomStart
+        ) {
+            Column {
+                Text(
+                    text = movie.title,
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
+                Text(
+                    text = movie.genre,
+                    color = Color.White,
+                    fontSize = 12.sp
+                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_textsms_24), // Replace with your star drawable resource
+                        contentDescription = "Rating Star",
+                        tint = Color.Yellow,
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Text(
+                        text = "${movie.rating}",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
+                        modifier = Modifier.padding(start = 4.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun NewMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = Color.Black)
+    ) {
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = Color.Black)
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "New Movies",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable { /* Handle upcoming movies click */ },
+                style = TextStyle(color = Color.White, fontSize = 12.sp)
+            )
+            Text(
+                text = "See All",
+                fontSize = 14.sp,
+                modifier = Modifier.clickable(onClick = onSeeAllClicked),
+                style = TextStyle(color = Color.White, fontSize = 12.sp)
+            )
+        }
+        LazyRow(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
+        ) {
+            items(movies) { movie ->
+                MovieItem(movie = movie, onMovieClick = { /* TODO: Handle movie click */ })
             }
         }
     }
