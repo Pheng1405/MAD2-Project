@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +23,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
@@ -73,6 +75,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -1102,6 +1105,7 @@ fun GreetingSection(username: String = "Pheng") {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .background(color = Color.Black)
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -1125,23 +1129,32 @@ fun GreetingSection(username: String = "Pheng") {
 fun SearchBar(hint: String = "What to Watch?") {
     var text by rememberSaveable { mutableStateOf("") }
 
-    BasicTextField(
-        value = text,
-        onValueChange = { text = it },
+    Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .background(Color.White, shape = CircleShape)
-            .padding(horizontal = 20.dp, vertical = 12.dp),
-        decorationBox = { innerTextField ->
-            Row(Modifier.fillMaxWidth()) {
-                if (text.isEmpty()) {
-                    Text(hint, style = TextStyle(color = Color.LightGray, fontSize = 16.sp))
+            .background(color = Color.Black)
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        BasicTextField(
+            value = text,
+            onValueChange = { text = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .background(Color.White, shape = CircleShape)
+                .padding(horizontal = 20.dp, vertical = 12.dp),
+            decorationBox = { innerTextField ->
+                Row(Modifier.fillMaxWidth()) {
+                    if (text.isEmpty()) {
+                        Text(hint, style = TextStyle(color = Color.LightGray, fontSize = 16.sp))
+                    }
+                    innerTextField()
                 }
-                innerTextField()
             }
-        }
-    )
+        )
+    }
+
 }
 
 //Movie Section
@@ -1199,4 +1212,55 @@ fun ErrorDialog(errorMessage: String, onDismiss: () -> Unit) {
             }
         }
     )
+}
+
+@Composable
+fun UpcomingMoviesComponent(
+    moviePosterUrls: List<String>, // List of image URLs as strings
+    onSeeAllClicked: () -> Unit,
+    onMoviePosterClicked: (Int) -> Unit // The Int represents the index of the clicked movie
+) {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Black)
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Upcoming Movies",
+                fontSize = 18.sp,
+                modifier = Modifier.clickable { /* Handle upcoming movies click */ },
+                style = TextStyle(color = Color.White, fontSize = 12.sp)
+            )
+            Text(
+                text = "See All",
+                fontSize = 14.sp,
+                modifier = Modifier.clickable(onClick = onSeeAllClicked),
+                style = TextStyle(color = Color.White, fontSize = 12.sp)
+            )
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .horizontalScroll(rememberScrollState())
+                .background(Color.Black)
+                .padding(start = 16.dp, end = 16.dp)
+
+        ) {
+            moviePosterUrls.forEachIndexed { index, url ->
+                Image(
+                    painter = rememberImagePainter(url),
+                    contentDescription = "Movie Poster",
+                    modifier = Modifier
+                        .size(width = 300.dp, height = 180.dp)
+                        .padding(end = 8.dp)
+                        .clickable { onMoviePosterClicked(index) },
+                    contentScale = ContentScale.Crop
+                )
+            }
+        }
+    }
 }
