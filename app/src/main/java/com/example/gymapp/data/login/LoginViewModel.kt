@@ -1,5 +1,6 @@
 package com.example.gymapp.data.login
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.gymapp.rules.Validator
@@ -61,26 +62,8 @@ class LoginViewModel : ViewModel() {
         val email = loginUIState.value.email
         val password = loginUIState.value.password
 
-//        FirebaseAuth
-//            .getInstance()
-//            .signInWithEmailAndPassword(email, password)
-//            .addOnCompleteListener {
-//                Log.d(TAG,"Inside_login_success")
-//                Log.d(TAG,"${it.isSuccessful}")
-//
-//                if(it.isSuccessful){
-//                    loginInProgress.value = false
-//                    PostOfficeAppRouter.navigateTo(Screen.HomeScreen)
-//                }
-//            }
-//            .addOnFailureListener {
-//                Log.d(TAG,"Inside_login_failure")
-//                Log.d(TAG,"${it.localizedMessage}")
-//
-//                loginInProgress.value = false
-//
-//            }
-//
+        Log.i("email",email)
+        Log.i("password",password)
     }
 
 }
