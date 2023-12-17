@@ -1,18 +1,23 @@
 package com.example.gymapp.data.login
-
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+//import com.example.gymapp.auth.TokenManager
 import com.example.gymapp.data.remote.MovieGenresApi
 import com.example.gymapp.domain.model.SignInDto
 import com.example.gymapp.rules.Validator
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+//    private val tokenManager: TokenManager
+) : ViewModel() {
+
     var loginUIState = mutableStateOf(LoginUIState())
 
     var allValidationsPassed = mutableStateOf(false)
@@ -80,8 +85,6 @@ class LoginViewModel : ViewModel() {
 
             try {
                 val result = service.siginIn(signInDto)
-                println("Data: $result")
-                println("MovieGenres: ${result.data}")
                 loginInProgress.value = false
             } catch (e: Exception) {
                 loginError.value = "Login failed: Invalid email or password"

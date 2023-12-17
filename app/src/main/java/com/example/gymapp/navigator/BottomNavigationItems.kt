@@ -25,11 +25,6 @@ data class BottomNavigationItem(
                 icon = Icons.Filled.Search,
                 route = Screen.SignUpScreen.route
             ),
-            BottomNavigationItem(
-                label = "Sign In",
-                icon = Icons.Filled.KeyboardArrowUp,
-                route = Screen.SignInScreen.route
-            ),
 
             BottomNavigationItem(
                 label = "Genres",

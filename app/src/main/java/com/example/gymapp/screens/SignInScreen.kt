@@ -41,6 +41,9 @@ fun SignInScreen(loginViewModel: LoginViewModel = viewModel(), navController: Na
 
     val loginError by loginViewModel.loginError.observeAsState()
 
+//    private val viewModel: MainViewModel by viewModels()
+
+
     loginError?.let {
         ErrorDialog(errorMessage = it) {
             loginViewModel.loginError.value = null // Reset error after displaying
