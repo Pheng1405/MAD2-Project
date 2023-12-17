@@ -3,12 +3,15 @@ package com.example.gymapp.data.login
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.gymapp.data.remote.MovieGenresApi
+import com.example.gymapp.domain.model.SignInDto
 import com.example.gymapp.rules.Validator
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginViewModel : ViewModel() {
-
-    private val TAG = LoginViewModel::class.simpleName
-
     var loginUIState = mutableStateOf(LoginUIState())
 
     var allValidationsPassed = mutableStateOf(false)
@@ -61,9 +64,28 @@ class LoginViewModel : ViewModel() {
         loginInProgress.value = true
         val email = loginUIState.value.email
         val password = loginUIState.value.password
+        val signInDto = SignInDto(email, password)
 
-        Log.i("email",email)
-        Log.i("password",password)
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://api.mc-dragon.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(MovieGenresApi::class.java)
+
+        Log.i("Click", "Clicked")
+        viewModelScope.launch {
+            Log.i("View Model Scope", "Clicked")
+
+            try {
+                val result = service.siginIn(signInDto)
+                println("Data: $result")
+                println("MovieGenres: ${result.data}")
+                loginInProgress.value = false
+            } catch (e: Exception) {
+                println("Error: ${e.message}")
+        }
+
+        }
     }
 
 }

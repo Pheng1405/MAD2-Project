@@ -5,6 +5,7 @@ import com.example.gymapp.data.repository.MovieRepositoryImpl
 import com.example.gymapp.domain.MovieRepository
 import com.example.gymapp.domain.use_case.GetAllMovieGenresUseCase
 import com.example.gymapp.domain.use_case.GetOneMovieGenresUseCase
+import com.example.gymapp.domain.use_case.SignInUseCase
 import com.example.gymapp.domain.use_case.UseCases
 import dagger.Module
 import dagger.Provides
@@ -28,5 +29,6 @@ object RepositoryModule {
         UseCases(
             getAllMovieGenresUseCase = GetAllMovieGenresUseCase(repository = repository),
             getOneMovieGenresUseCase = GetOneMovieGenresUseCase(repository = repository),
+            signInUseCase = SignInUseCase(repository = repository)
         )
 }

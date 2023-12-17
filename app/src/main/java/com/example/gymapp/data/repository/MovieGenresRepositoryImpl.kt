@@ -3,8 +3,10 @@ package com.example.gymapp.data.repository
 import com.example.gymapp.data.remote.MovieGenresApi
 import com.example.gymapp.domain.MovieRepository
 import com.example.gymapp.domain.model.AllMovieGenres
-import com.example.gymapp.domain.model.MovieGenres
+
 import com.example.gymapp.domain.model.MovieGenresDto
+import com.example.gymapp.domain.model.SignInDto
+import com.example.gymapp.domain.model.SignInResponseDto
 import com.example.gymapp.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -39,6 +41,23 @@ class MovieRepositoryImpl @Inject constructor(
         emit(Resource.Loading())
         try {
             val response = movieGenresApi.getOneMovieGenres(id)
+            emit(Resource.Success(data = response))
+        } catch (e: HttpException) {
+            emit(Resource.Error(
+                message = e.message.toString(),
+            ))
+
+        } catch (e: IOException) {
+            emit(Resource.Error(
+                message = e.message.toString(),
+            ))
+        }
+    }
+
+    override suspend fun signIn(signInDto: SignInDto): Flow<Resource<SignInResponseDto>> = flow{
+        emit(Resource.Loading())
+        try {
+            val response = movieGenresApi.siginIn(signInDto)
             emit(Resource.Success(data = response))
         } catch (e: HttpException) {
             emit(Resource.Error(
