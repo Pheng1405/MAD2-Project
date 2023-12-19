@@ -94,7 +94,8 @@ dependencies {
     annotationProcessor ("com.google.dagger:hilt-android-compiler:2.48")
 
 
-    
+    //exo player
+    implementation("com.google.android.exoplayer:exoplayer:2.15.1")
 
     // coil
     implementation("io.coil-kt:coil-compose:1.4.0")
