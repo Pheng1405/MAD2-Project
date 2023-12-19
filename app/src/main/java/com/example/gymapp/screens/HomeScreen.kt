@@ -11,6 +11,7 @@ import com.example.gymapp.components.SearchBar
 import com.example.gymapp.components.UpcomingMoviesComponent
 import com.example.gymapp.data.home.HomeViewModel
 import com.example.gymapp.domain.model.MovieModel
+import com.example.gymapp.navigator.Screen
 
 
 @Composable
@@ -38,7 +39,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel(), navController: NavCon
                     posterUrls,
                     onSeeAllClicked = { /* Handle See All click */ },
                     onMoviePosterClicked = { index ->
-
+                        navController.navigate(Screen.MovieDetail.route)
                     }
                 )
             }

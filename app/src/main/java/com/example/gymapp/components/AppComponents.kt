@@ -1,7 +1,11 @@
 package com.example.gymapp.components
 
+import android.app.Activity
+import android.content.Context
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.util.Log
+import android.view.View
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -1269,27 +1273,44 @@ fun NewMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
     }
 }
 
-
 @Composable
-fun VideoPlayer(url: String) {
+fun VideoPlayer(url: String, activity: Activity) {
     val context = LocalContext.current
+    val isFullScreen = remember { mutableStateOf(false) }
 
-    AndroidView(
-        factory = { ctx ->
-            val exoPlayer = SimpleExoPlayer.Builder(ctx).build()
-            val dataSourceFactory = DefaultDataSourceFactory(ctx, Util.getUserAgent(ctx, ctx.packageName))
-            val mediaSource = HlsMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(url))
+    val exoPlayerState = remember { mutableStateOf<SimpleExoPlayer?>(null) }
 
-            exoPlayer.prepare(mediaSource)
-            exoPlayer.playWhenReady = true
+    // Function to initialize ExoPlayer
+    fun initializePlayer(ctx: Context): SimpleExoPlayer {
+        val exoPlayer = SimpleExoPlayer.Builder(ctx).build()
+        exoPlayerState.value = exoPlayer
+        val dataSourceFactory = DefaultDataSourceFactory(ctx, Util.getUserAgent(ctx, ctx.packageName))
+        val mediaSource = HlsMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(url))
 
-            StyledPlayerView(ctx).apply {
-                player = exoPlayer
-                useController = true
-            }
-        },
-        modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(16f / 9f)
-    )
+        exoPlayer.prepare(mediaSource)
+        exoPlayer.playWhenReady = true
+        return exoPlayer
+    }
+
+    Box(modifier = Modifier
+        .clickable {
+            isFullScreen.value = !isFullScreen.value
+            activity.requestedOrientation = if (isFullScreen.value)
+                ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+            else
+                ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
+        }
+    ) {
+        AndroidView(
+            factory = { ctx ->
+                StyledPlayerView(ctx).apply {
+                    player = initializePlayer(ctx)
+                    useController = true
+                }
+            },
+            modifier = if (isFullScreen.value) Modifier.fillMaxSize() else Modifier
+                .fillMaxWidth()
+                .aspectRatio(16f / 9f)
+        )
+    }
 }
