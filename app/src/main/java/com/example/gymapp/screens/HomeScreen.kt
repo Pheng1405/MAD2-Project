@@ -1,15 +1,8 @@
 package com.example.gymapp.screens
 
-import android.util.Log
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.gymapp.components.GreetingSection
@@ -31,9 +24,9 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel(), navController: NavCon
 
 
     val movieList = listOf(
-        MovieModel("Wanda Vision", "Action", 4.5, "https://www.movieposters.com/cdn/shop/products/wandavision.R85648_480x.progressive.jpg?v=1673638271"),
-        MovieModel("The Flash", "Action", 4.5, "https://www.movieposters.com/cdn/shop/products/965a99756171f61611b6d6667b9f4004_480x.progressive.jpg?v=1573572622"),
-        MovieModel("Loki", "Action", 4.5, "https://www.movieposters.com/cdn/shop/products/54362_2_480x.progressive.png.jpg?v=1634831916"),
+        MovieModel("1", "Wanda Vision", "Action", 4.5, "https://www.movieposters.com/cdn/shop/products/wandavision.R85648_480x.progressive.jpg?v=1673638271"),
+        MovieModel("2","The Flash", "Action", 4.5, "https://www.movieposters.com/cdn/shop/products/965a99756171f61611b6d6667b9f4004_480x.progressive.jpg?v=1573572622"),
+        MovieModel("1", "Loki", "Action", 4.5, "https://www.movieposters.com/cdn/shop/products/54362_2_480x.progressive.png.jpg?v=1634831916"),
     )
 
     Column {
@@ -45,7 +38,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel(), navController: NavCon
                     posterUrls,
                     onSeeAllClicked = { /* Handle See All click */ },
                     onMoviePosterClicked = { index ->
-                        // Handle movie poster click, `index` is the index of the clicked poster
+
                     }
                 )
             }

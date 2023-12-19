@@ -16,6 +16,8 @@ sealed class Screen(val route: String) {
     object Genres : Screen("genres")
 
     object GenresDetail : Screen("genres")
+
+    object MovieDetail : Screen("movies")
 }
 
 
@@ -27,9 +29,4 @@ object PostOfficeAppRouter {
         currentScreen.value = destination
     }
 
-}
-
-@Composable
-fun TestScreen(navController: NavController){
-    Text(text = "Hello Test");
 }

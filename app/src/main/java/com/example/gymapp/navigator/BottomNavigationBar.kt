@@ -3,6 +3,7 @@ package com.example.gymapp.navigator
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -17,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.gymapp.screens.HomeScreen
+import com.example.gymapp.screens.MovieDetail.MovieDetailScreen
 import com.example.gymapp.screens.MovieGenres.MovieGenresScreen
 import com.example.gymapp.screens.MovieGenresDetail.MovieGenresDetailScreen
 import com.example.gymapp.screens.SignInScreen
@@ -24,6 +26,7 @@ import com.example.gymapp.screens.SignUpScreen
 import com.example.gymapp.screens.TermsAndConditionsScreen
 import com.example.gymapp.ui.theme.Primary
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomNavigationBar() {
     val navController = rememberNavController()
@@ -81,12 +84,6 @@ fun BottomNavigationBar() {
                 )
             }
 
-            composable(Screen.Test.route) {
-                TestScreen(
-                    navController = navController
-                )
-            }
-
             composable(Screen.TermsAndConditionsScreen.route) {
                 TermsAndConditionsScreen(
                     navController = navController
@@ -102,6 +99,20 @@ fun BottomNavigationBar() {
             composable("${Screen.GenresDetail.route}/{id}") { backStackEntry ->
                 val id = backStackEntry.arguments?.getString("id")
                 MovieGenresDetailScreen(
+                    navController = navController,
+                )
+            }
+
+//            composable("${Screen.MovieDetail.route}") { backStackEntry ->
+////                val id = backStackEntry.arguments?.getString("id")
+//                MovieDetailScreen(
+//                    navController = navController,
+//                )
+//            }
+
+            composable(Screen.MovieDetail.route) { backStackEntry ->
+//                val id = backStackEntry.arguments?.getString("id")
+                MovieDetailScreen(
                     navController = navController,
                 )
             }

@@ -1,5 +1,6 @@
 package com.example.gymapp.components
 
+import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -72,6 +74,7 @@ import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -95,6 +98,7 @@ import androidx.compose.ui.unit.TextUnit
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.gymapp.R
 import com.example.gymapp.data.NavigationItem
@@ -109,6 +113,11 @@ import coil.compose.rememberImagePainter
 import com.example.gymapp.domain.model.MovieGenres
 import com.example.gymapp.domain.model.MovieModel
 import com.example.gymapp.navigator.Screen
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.source.hls.HlsMediaSource
+import com.google.android.exoplayer2.ui.StyledPlayerView
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.exoplayer2.util.Util
 
 
 @Composable
@@ -945,96 +954,6 @@ fun MovieLargeContainer(
     }
 }
 
-@Preview
-@ExperimentalMaterial3Api
-@Composable
-fun MovieDetailScreen() {
-    Column(modifier = Modifier.fillMaxSize()) {
-        TopAppBar(
-            title = { Text("Movie Details") },
-            modifier = Modifier.background(color = Color.Black),
-
-            )
-
-        // Movie poster and play button
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-        ) {
-            Image(
-                painter = rememberImagePainter("https://wallpapers.com/images/featured-full/avengers-vm16xv4a69smdauy.jpg"),
-                contentDescription = "Movie Poster",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-            IconButton(
-                onClick = { /* TODO: Handle play movie */ },
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .size(48.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.PlayArrow,
-                    contentDescription = "Play",
-                    tint = Color.White,
-                    modifier = Modifier.size(48.dp)
-                )
-            }
-        }
-
-        // Movie title and actions
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Doctor Strange 2",
-                style = TextStyle(fontSize = 24.sp, color = Color.White)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            IconButton(onClick = { /* TODO: Handle favorite */ }) {
-                Icon(Icons.Default.Favorite, contentDescription = "Like")
-            }
-            IconButton(onClick = { /* TODO: Handle share */ }) {
-                Icon(Icons.Default.Share, contentDescription = "Share")
-            }
-        }
-
-        // Movie description
-        Text(
-            text = "This is the sample description of the movie...",
-            modifier = Modifier.padding(16.dp),
-            color = Color.Gray
-        )
-
-        // Recommended section
-        Text(
-            text = "Recommended",
-            modifier = Modifier.padding(16.dp),
-            style = TextStyle(fontSize = 18.sp, color = Color.White)
-        )
-        LazyRow {
-            items(recommendations) { recommendation ->
-                Card(
-                    shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .size(120.dp, 180.dp)
-                ) {
-                    Image(
-                        painter = rememberImagePainter(recommendation.imageRes),
-                        contentDescription = "Recommended Movie",
-                        contentScale = ContentScale.Crop
-                    )
-                }
-            }
-        }
-    }
-}
-
 // Dummy data for recommendations, replace with real data
 val recommendations = listOf(
     Recommendation(imageRes = R.drawable.baseline_textsms_24),
@@ -1348,4 +1267,29 @@ fun NewMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
             }
         }
     }
+}
+
+
+@Composable
+fun VideoPlayer(url: String) {
+    val context = LocalContext.current
+
+    AndroidView(
+        factory = { ctx ->
+            val exoPlayer = SimpleExoPlayer.Builder(ctx).build()
+            val dataSourceFactory = DefaultDataSourceFactory(ctx, Util.getUserAgent(ctx, ctx.packageName))
+            val mediaSource = HlsMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(url))
+
+            exoPlayer.prepare(mediaSource)
+            exoPlayer.playWhenReady = true
+
+            StyledPlayerView(ctx).apply {
+                player = exoPlayer
+                useController = true
+            }
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(16f / 9f)
+    )
 }

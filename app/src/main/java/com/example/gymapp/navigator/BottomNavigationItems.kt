@@ -33,9 +33,9 @@ data class BottomNavigationItem(
             ),
 
             BottomNavigationItem(
-                label = "Test",
+                label = "Movie Screen",
                 icon = Icons.Filled.AccountCircle,
-                route = Screen.TermsAndConditionsScreen.route
+                route = Screen.MovieDetail.route
             ),
         )
     }
