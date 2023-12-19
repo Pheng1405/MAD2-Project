@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import com.example.gymapp.components.VideoPlayer
 import com.example.gymapp.components.recommendations
 
 @ExperimentalMaterial3Api
@@ -75,6 +76,13 @@ fun MovieDetailScreen(navController: NavController) {
 //                }
 //            }
 
+            Box(
+
+            ){
+                VideoPlayer(url = "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8")
+            }
+                
+
             // Movie title and actions
             Row(
                 modifier = Modifier
@@ -84,7 +92,7 @@ fun MovieDetailScreen(navController: NavController) {
             ) {
                 Text(
                     text = "Doctor Strange 2",
-                    style = TextStyle(fontSize = 24.sp, color = Color.White)
+                    style = TextStyle(fontSize = 24.sp, color = Color.Black)
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 IconButton(onClick = { /* TODO: Handle favorite */ }) {
@@ -97,7 +105,7 @@ fun MovieDetailScreen(navController: NavController) {
 
             // Movie description
             Text(
-                text = "This is the sample description of the movie...",
+                text = "Strange was a skilled neurosurgeon before nerve damage impaired his hands. Doctor Strange is described as \"the mightiest magician in the cosmos\" and \"more powerful by far than any of your fellow humanoids\" by Eternity, the sentience of the Marvel Universe.",
                 modifier = Modifier.padding(16.dp),
                 color = Color.Gray
             )
