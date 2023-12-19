@@ -42,6 +42,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.gymapp.components.NewMoviesSection
+import com.example.gymapp.components.RecommendMoviesSection
 import com.example.gymapp.components.VideoPlayer
 import com.example.gymapp.components.recommendations
 import com.example.gymapp.domain.model.MovieModel
@@ -123,7 +124,7 @@ fun MovieDetailScreen(navController: NavController) {
             )
             LazyColumn{
                 item{
-                    NewMoviesSection(movieList, onSeeAllClicked = {})
+                    RecommendMoviesSection(movieList, onSeeAllClicked = {})
                 }
             }
         }

@@ -1273,6 +1273,48 @@ fun NewMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
     }
 }
 
+
+@Composable
+fun RecommendMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = Color.Black)
+    ) {
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = Color.White)
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "New Movies",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable { /* Handle upcoming movies click */ },
+                style = TextStyle(color = Color.Black, fontSize = 12.sp)
+            )
+            Text(
+                text = "See All",
+                fontSize = 14.sp,
+                modifier = Modifier.clickable(onClick = onSeeAllClicked),
+                style = TextStyle(color = Color.Black, fontSize = 12.sp)
+            )
+        }
+        LazyRow(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
+        ) {
+            items(movies) { movie ->
+                MovieItem(movie = movie, onMovieClick = { /* TODO: Handle movie click */ })
+            }
+        }
+    }
+}
+
+
 @Composable
 fun VideoPlayer(url: String, activity: Activity) {
     val context = LocalContext.current
