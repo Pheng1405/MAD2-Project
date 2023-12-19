@@ -56,76 +56,75 @@ fun MovieDetailScreen(navController: NavController) {
             MovieModel("1", "Loki", "Action", 4.5, "https://www.movieposters.com/cdn/shop/products/54362_2_480x.progressive.png.jpg?v=1634831916"),
         )
         val activity = LocalContext.current as Activity
-        Column(modifier = Modifier.fillMaxSize()) {
-            val showVideoPlayer = remember { mutableStateOf(false) }
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(250.dp)
-            ) {
-                if (!showVideoPlayer.value) {
-                    Image(
-                        painter = rememberImagePainter("https://wallpapers.com/images/featured-full/avengers-vm16xv4a69smdauy.jpg"),
-                        contentDescription = "Movie Poster",
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Crop
-                    )
-                    IconButton(
-                        onClick = { showVideoPlayer.value = true },
-                        modifier = Modifier
-                            .align(Alignment.Center)
-                            .size(48.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.PlayArrow,
-                            contentDescription = "Play",
-                            tint = Color.White,
-                            modifier = Modifier.size(48.dp)
+        val showVideoPlayer = remember { mutableStateOf(false) }
+
+
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(250.dp)
+                ) {
+                    if (!showVideoPlayer.value) {
+                        Image(
+                            painter = rememberImagePainter("https://wallpapers.com/images/featured-full/avengers-vm16xv4a69smdauy.jpg"),
+                            contentDescription = "Movie Poster",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop
                         )
+                        IconButton(
+                            onClick = { showVideoPlayer.value = true },
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .size(48.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.PlayArrow,
+                                contentDescription = "Play",
+                                tint = Color.White,
+                                modifier = Modifier.size(48.dp)
+                            )
+                        }
+                    } else {
+                        VideoPlayer(url = "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8", activity = activity)
                     }
-                } else {
-                    VideoPlayer(url = "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8", activity = activity)
                 }
-            }
-                
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Doctor Strange 2",
+                        style = TextStyle(fontSize = 24.sp, color = Color.Black)
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    IconButton(onClick = { /* TODO: Handle favorite */ }) {
+                        Icon(Icons.Default.Favorite, contentDescription = "Like")
+                    }
+                    IconButton(onClick = { /* TODO: Handle share */ }) {
+                        Icon(Icons.Default.Share, contentDescription = "Share")
+                    }
+                }
 
-            // Movie title and actions
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(10.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+                // Movie description
                 Text(
-                    text = "Doctor Strange 2",
-                    style = TextStyle(fontSize = 24.sp, color = Color.Black)
+                    text = "Strange was a skilled neurosurgeon before nerve damage impaired his hands. Doctor Strange is described as \"the mightiest magician in the cosmos\" and \"more powerful by far than any of your fellow humanoids\" by Eternity, the sentience of the Marvel Universe.",
+                    modifier = Modifier.padding(16.dp),
+                    color = Color.Gray
                 )
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(onClick = { /* TODO: Handle favorite */ }) {
-                    Icon(Icons.Default.Favorite, contentDescription = "Like")
-                }
-                IconButton(onClick = { /* TODO: Handle share */ }) {
-                    Icon(Icons.Default.Share, contentDescription = "Share")
-                }
-            }
 
-            // Movie description
-            Text(
-                text = "Strange was a skilled neurosurgeon before nerve damage impaired his hands. Doctor Strange is described as \"the mightiest magician in the cosmos\" and \"more powerful by far than any of your fellow humanoids\" by Eternity, the sentience of the Marvel Universe.",
-                modifier = Modifier.padding(16.dp),
-                color = Color.Gray
-            )
+                // Recommended section
+                Text(
+                    text = "Recommended",
+                    modifier = Modifier.padding(10.dp),
+                    style = TextStyle(fontSize = 18.sp, color = Color.White)
+                )
+                RecommendMoviesSection(movieList, onSeeAllClicked = {})
 
-            // Recommended section
-            Text(
-                text = "Recommended",
-                modifier = Modifier.padding(10.dp),
-                style = TextStyle(fontSize = 18.sp, color = Color.White)
-            )
-            LazyColumn{
-                item{
-                    RecommendMoviesSection(movieList, onSeeAllClicked = {})
-                }
             }
         }
 }

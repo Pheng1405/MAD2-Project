@@ -1279,7 +1279,7 @@ fun RecommendMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = Color.Black)
+            .background(color = Color.White)
     ) {
 
         Row(
@@ -1331,7 +1331,9 @@ fun VideoPlayer(url: String, activity: Activity) {
 
         exoPlayer.prepare(mediaSource)
         exoPlayer.playWhenReady = true
+
         return exoPlayer
+
     }
 
     Box(modifier = Modifier
@@ -1353,6 +1355,9 @@ fun VideoPlayer(url: String, activity: Activity) {
             modifier = if (isFullScreen.value) Modifier.fillMaxSize() else Modifier
                 .fillMaxWidth()
                 .aspectRatio(16f / 9f)
+
+
         )
+
     }
 }
