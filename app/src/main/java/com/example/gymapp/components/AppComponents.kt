@@ -1215,7 +1215,7 @@ fun MovieItem(movie: MovieModel, onMovieClick: () -> Unit) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.baseline_textsms_24), // Replace with your star drawable resource
+                        painter = painterResource(id = R.drawable.baseline_star_24), // Replace with your star drawable resource
                         contentDescription = "Rating Star",
                         tint = Color.Yellow,
                         modifier = Modifier.size(16.dp)
