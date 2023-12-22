@@ -1,7 +1,7 @@
 package com.example.gymapp.util
 
 object Constants {
-    const val BASE_URL = "https://api.mc-dragon.com"
+    const val BASE_URL = "https://mc-api.flexibiz.tech"
     const val ACCESS_TOKEN = "accessToken"
     const val REFRESH_TOKEN = "refreshToken"
     const val  DATASTORE_NAME = "TEST"
