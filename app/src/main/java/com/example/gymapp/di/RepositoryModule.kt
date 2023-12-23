@@ -4,6 +4,7 @@ import com.example.gymapp.data.remote.MovieGenresApi
 import com.example.gymapp.data.repository.MovieRepositoryImpl
 import com.example.gymapp.domain.MovieRepository
 import com.example.gymapp.domain.use_case.GetAllMovieGenresUseCase
+import com.example.gymapp.domain.use_case.GetAllMovieUseCase
 import com.example.gymapp.domain.use_case.GetOneMovieGenresUseCase
 import com.example.gymapp.domain.use_case.SignInUseCase
 import com.example.gymapp.domain.use_case.UseCases
@@ -29,6 +30,7 @@ object RepositoryModule {
         UseCases(
             getAllMovieGenresUseCase = GetAllMovieGenresUseCase(repository = repository),
             getOneMovieGenresUseCase = GetOneMovieGenresUseCase(repository = repository),
-            signInUseCase = SignInUseCase(repository = repository)
+            signInUseCase = SignInUseCase(repository = repository),
+            getAllMovieUseCase = GetAllMovieUseCase(repository = repository)
         )
 }

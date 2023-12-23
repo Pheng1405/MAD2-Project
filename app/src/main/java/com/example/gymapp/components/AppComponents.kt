@@ -1167,7 +1167,7 @@ fun MovieItem(movie: MovieModel, onMovieClick: () -> Unit) {
     ) {
         Image(
             painter = rememberImagePainter(
-                data = movie.imageUrl,
+                data = IMAGE_BASE_URL + movie.thumbnail,
                 builder = {
                     crossfade(true)
                 }
@@ -1190,7 +1190,7 @@ fun MovieItem(movie: MovieModel, onMovieClick: () -> Unit) {
                     fontSize = 16.sp
                 )
                 Text(
-                    text = movie.genre,
+                    text = movie.title,
                     color = Color.White,
                     fontSize = 12.sp
                 )

@@ -1,5 +1,6 @@
 package com.example.gymapp.data.remote
 import com.example.gymapp.domain.model.AllMovieGenres
+import com.example.gymapp.domain.model.AllMovieModel
 import com.example.gymapp.domain.model.MovieGenres
 import com.example.gymapp.domain.model.MovieGenresDto
 import com.example.gymapp.domain.model.SignInDto
@@ -22,4 +23,7 @@ interface MovieGenresApi{
     @POST("/users/login-with-password")
     @Headers("Content-Type: application/json")
     suspend fun siginIn(@Body() signInDto  : SignInDto): SignInResponseDto
+
+    @GET("/video/all-no-auth")
+    suspend fun getAllMovies(): AllMovieModel
 }

@@ -51,9 +51,9 @@ import com.example.gymapp.domain.model.MovieModel
 @Composable
 fun MovieDetailScreen(navController: NavController) {
         val movieList = listOf(
-            MovieModel("1", "Wanda Vision", "Action", 4.5, "https://www.movieposters.com/cdn/shop/products/wandavision.R85648_480x.progressive.jpg?v=1673638271"),
-            MovieModel("2","The Flash", "Action", 4.5, "https://www.movieposters.com/cdn/shop/products/965a99756171f61611b6d6667b9f4004_480x.progressive.jpg?v=1573572622"),
-            MovieModel("1", "Loki", "Action", 4.5, "https://www.movieposters.com/cdn/shop/products/54362_2_480x.progressive.png.jpg?v=1634831916"),
+            MovieModel("1", "Wanda Vision", "Action", "https://www.movieposters.com/cdn/shop/products/wandavision.R85648_480x.progressive.jpg?v=1673638271", "https://www.movieposters.com/cdn/shop/products/wandavision.R85648_480x.progressive.jpg?v=1673638271", 4.5),
+            MovieModel("2","The Flash", "Action",  "https://www.movieposters.com/cdn/shop/products/965a99756171f61611b6d6667b9f4004_480x.progressive.jpg?v=1573572622","https://www.movieposters.com/cdn/shop/products/wandavision.R85648_480x.progressive.jpg?v=1673638271", 4.5),
+            MovieModel("1", "Loki", "Action",  "https://www.movieposters.com/cdn/shop/products/54362_2_480x.progressive.png.jpg?v=1634831916","https://www.movieposters.com/cdn/shop/products/wandavision.R85648_480x.progressive.jpg?v=1673638271", 4.5),
         )
         val activity = LocalContext.current as Activity
         val showVideoPlayer = remember { mutableStateOf(false) }
