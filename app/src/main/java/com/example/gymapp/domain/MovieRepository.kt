@@ -19,6 +19,5 @@ interface  MovieRepository {
 
     suspend fun getAllMovie(): Flow<Resource<AllMovieModel>>
 
-
-//    suspend fun getOneMovie() : Flow<Resource<MovieGenres>>
+    suspend fun getOneMovieById(id : String) : Flow<Resource<MovieModel>>
 }

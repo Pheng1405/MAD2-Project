@@ -3,6 +3,7 @@ import com.example.gymapp.domain.model.AllMovieGenres
 import com.example.gymapp.domain.model.AllMovieModel
 import com.example.gymapp.domain.model.MovieGenres
 import com.example.gymapp.domain.model.MovieGenresDto
+import com.example.gymapp.domain.model.MovieModel
 import com.example.gymapp.domain.model.SignInDto
 import com.example.gymapp.domain.model.SignInResponseDto
 import retrofit2.http.Body
@@ -26,4 +27,9 @@ interface MovieGenresApi{
 
     @GET("/video/all-no-auth")
     suspend fun getAllMovies(): AllMovieModel
+
+    @GET("/video/one-no-auth/{id}")
+    suspend fun getOneMovie(@Path("id") id: String): MovieModel
+
+
 }
