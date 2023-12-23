@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.gymapp.components.MovieGenreCard
 import com.example.gymapp.components.MovieGenresContainer
 import com.example.gymapp.domain.model.MovieGenres
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -41,7 +42,7 @@ fun MovieGenresScreen(
     }
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
+//        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
     ) {
@@ -52,14 +53,12 @@ fun MovieGenresScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp)
-                    .fillMaxHeight(0.9f)
             ) {
                 if (state.category?.isNotEmpty() == true) {
                     categories.toSet().forEach { category ->
                         item {
                             state.category?.let {
-                                MovieGenresContainer(
+                                MovieGenreCard(
                                     category,
                                     navController
                                 )

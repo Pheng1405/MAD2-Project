@@ -117,6 +117,7 @@ import coil.compose.rememberImagePainter
 import com.example.gymapp.domain.model.MovieGenres
 import com.example.gymapp.domain.model.MovieModel
 import com.example.gymapp.navigator.Screen
+import com.example.gymapp.util.Constants.IMAGE_BASE_URL
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.ui.StyledPlayerView
@@ -1062,24 +1063,6 @@ fun SearchBar(hint: String = "What to Watch?") {
 
 }
 
-//Movie Section
-
-//@Composable
-//fun MovieSection(title: String, movies: List<Movie>) {
-//    Column(modifier = Modifier.fillMaxWidth()) {
-//        Text(
-//            text = title,
-//            style = TextStyle(fontSize = 18.sp, color = Color.White),
-//            modifier = Modifier.padding(16.dp)
-//        )
-//        LazyRow {
-//            items(movies) { movie ->
-//                MovieCard(movie)
-//            }
-//        }
-//    }
-//}
-
 @Preview
 @Composable
 fun MovieCard() {
@@ -1360,4 +1343,51 @@ fun VideoPlayer(url: String, activity: Activity) {
         )
 
     }
+}
+
+@Composable
+fun MovieGenreCard(movieGenres: MovieGenres,
+                   navController: NavController,
+                   onDetailButtonClick: () -> Unit = {}
+) {
+    Card(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+            .height(150.dp)
+            .clickable{
+                    println("${movieGenres.id}")
+                    navController.navigate(Screen.GenresDetail.route+"/${movieGenres.id}")
+            },
+        shape = RoundedCornerShape(15.dp),
+//        elevation = 5.dp
+    ) {
+        Box {
+            ImageComponent(movieGenres.thumbnail)
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(12.dp),
+                contentAlignment = Alignment.BottomStart
+            ) {
+                Text(
+                    text = movieGenres.name,
+                    color = Color.White,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+    }
+}
+
+
+@Composable
+fun ImageComponent(imgUrl : String){
+    Image(
+        painter = rememberImagePainter(IMAGE_BASE_URL+imgUrl),
+        contentDescription = "Movie Genre Image",
+        contentScale = ContentScale.Crop,
+        modifier = Modifier.fillMaxSize()
+    )
 }
