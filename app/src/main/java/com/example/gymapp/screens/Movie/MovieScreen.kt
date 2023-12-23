@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.gymapp.components.GreetingSection
+import com.example.gymapp.components.MovieCardGrid
 import com.example.gymapp.components.MovieScreenList
 import com.example.gymapp.components.NewMoviesSection
 import com.example.gymapp.components.SearchBar
@@ -40,7 +41,7 @@ fun MovieScreen(
 
         SearchBar()
         if (new_movie != null) {
-            MovieScreenList(new_movie, onSeeAllClicked = { /* Handle See All click */ })
+            MovieCardGrid(new_movie, onSeeAllClicked = { /* Handle See All click */ })
         }
     }
 }

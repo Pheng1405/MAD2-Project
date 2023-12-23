@@ -1402,3 +1402,24 @@ fun MovieScreenList(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
             }
         }
 }
+
+@Composable
+fun MovieCardGrid(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
+    LazyColumn {
+        items(movies.chunked(2)) { rowCards ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                for (card in rowCards) {
+                    MovieItem(movie = card, onMovieClick = { /* TODO: Handle movie click */ })
+                }
+                if (rowCards.size % 2 != 0) {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
+            }
+        }
+    }
+}
