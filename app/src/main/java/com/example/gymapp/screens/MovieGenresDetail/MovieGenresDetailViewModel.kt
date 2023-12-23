@@ -35,29 +35,12 @@ class MovieGenresDetailViewModel @Inject constructor(
             viewModelState.value.toUiState()
         )
 
-    init {
-        getMovieGenresById("91a60f8d-71c1-4a2f-b881-d04174af3ee9")
-//        viewModelScope.launch {
-//
-//        }
-
+    fun loadGenreData(id: String) {
+        getMovieGenresById(id)
     }
 
     // if use retrofit use suspend private suspend fun getMovieGenresById
     private fun getMovieGenresById(id: String) {
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl("https://api.mc-dragon.com")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//        val service = retrofit.create(MovieGenresApi::class.java)
-//        val id = "91a60f8d-71c1-4a2f-b881-d04174af3ee9"
-//        try {
-//            val result = service.getOneMovieGenres(id)
-//            println("Data: $result")
-//            println("MovieGenres: ${result.data}")
-//        } catch (e: Exception) {
-//            println("Error fetching movie genre: ${e.message}")
-//        }
         viewModelScope.launch {
             useCases.getOneMovieGenresUseCase(id).collect  { result ->
                 viewModelState.update { state ->

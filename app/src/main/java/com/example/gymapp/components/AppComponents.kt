@@ -1356,7 +1356,6 @@ fun MovieGenreCard(movieGenres: MovieGenres,
             .fillMaxWidth()
             .height(150.dp)
             .clickable{
-                    println("${movieGenres.id}")
                     navController.navigate(Screen.GenresDetail.route+"/${movieGenres.id}")
             },
         shape = RoundedCornerShape(15.dp),

@@ -42,8 +42,6 @@ class MovieGenresViewModel @Inject constructor(
                 viewModelState.update { state ->
                     when (result) {
                         is Resource.Success -> {
-                            Log.d("tag", result.data!!.data.toString());
-                            Log.i(result.data!!.data[0].name, "sucess")
                             state.copy(
                                 category = result.data?.data,
                                 isLoading = false,
