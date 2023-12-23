@@ -1,24 +1,23 @@
-package com.example.gymapp.screens.Home
+package com.example.gymapp.screens.Movie
 
-import com.example.gymapp.domain.model.MovieGenres
 import com.example.gymapp.domain.model.MovieModel
 
-data class HomeScreenState(
+data class MovieScreenState(
     val isLoading: Boolean,
     val movie: List<MovieModel>?,
     val error: String,
 ){
-    fun toUiState() = HomeScreenState(
+    fun toUiState() = MovieScreenState(
         isLoading, movie, error
     )
 }
 
-data class HomeModelState(
+data class MovieModelState(
     val isLoading: Boolean = false,
     val movie: List<MovieModel>? = emptyList(),
     val error: String = "",
 ) {
-    fun toUiState() = HomeModelState(
+    fun toUiState() = MovieModelState(
         isLoading, movie, error
     )
 }

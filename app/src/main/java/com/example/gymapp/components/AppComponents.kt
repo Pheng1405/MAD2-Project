@@ -627,7 +627,7 @@ fun MovieGenresContainer(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(400.dp)
                 .clip(MaterialTheme.shapes.medium)
                 .clickable { onDetailButtonClick.invoke() }
         )
@@ -1389,4 +1389,16 @@ fun ImageComponent(imgUrl : String){
         contentScale = ContentScale.Crop,
         modifier = Modifier.fillMaxSize()
     )
+}
+
+
+@Composable
+fun MovieScreenList(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
+        LazyColumn(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
+        ) {
+            items(movies) { movie ->
+                MovieItem(movie = movie, onMovieClick = { /* TODO: Handle movie click */ })
+            }
+        }
 }

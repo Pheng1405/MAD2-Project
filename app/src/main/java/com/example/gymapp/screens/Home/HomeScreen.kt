@@ -1,4 +1,4 @@
-package com.example.gymapp.screens
+package com.example.gymapp.screens.Home
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -8,17 +8,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.gymapp.components.GreetingSection
 import com.example.gymapp.components.NewMoviesSection
 import com.example.gymapp.components.SearchBar
-import com.example.gymapp.components.UpcomingMoviesComponent
-import com.example.gymapp.data.home.HomeViewModel
 import com.example.gymapp.domain.model.MovieModel
 import com.example.gymapp.navigator.Screen
-import com.example.gymapp.screens.Home.HomeScreenViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 
@@ -51,7 +46,7 @@ fun HomeScreen(
 //            }
             item{
                 if (new_movie != null) {
-                    NewMoviesSection(new_movie, onSeeAllClicked = { /* Handle See All click */ })
+                    NewMoviesSection(new_movie, onSeeAllClicked = { navController.navigate(Screen.Movies.route) })
                 }
             }
         }

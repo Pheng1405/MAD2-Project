@@ -17,7 +17,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.gymapp.screens.HomeScreen
+import com.example.gymapp.screens.Home.HomeScreen
+import com.example.gymapp.screens.Movie.MovieScreen
 import com.example.gymapp.screens.MovieDetail.MovieDetailScreen
 import com.example.gymapp.screens.MovieGenres.MovieGenresScreen
 import com.example.gymapp.screens.MovieGenresDetail.MovieGenresDetailScreen
@@ -112,6 +113,12 @@ fun BottomNavigationBar() {
 //                    navController = navController,
 //                )
 //            }
+
+            composable(Screen.Movies.route) {
+                MovieScreen(
+                    navController = navController
+                )
+            }
 
             composable(Screen.MovieDetail.route) { backStackEntry ->
 //                val id = backStackEntry.arguments?.getString("id")
