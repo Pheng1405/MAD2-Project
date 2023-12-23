@@ -46,7 +46,7 @@ fun HomeScreen(
 //            }
             item{
                 if (new_movie != null) {
-                    NewMoviesSection(new_movie, onSeeAllClicked = { navController.navigate(Screen.Movies.route) })
+                    NewMoviesSection(new_movie, onSeeAllClicked = { navController.navigate(Screen.Movies.route) }, navController = navController)
                 }
             }
         }

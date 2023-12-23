@@ -41,7 +41,7 @@ fun MovieScreen(
 
         SearchBar()
         if (new_movie != null) {
-            MovieCardGrid(new_movie, onSeeAllClicked = { /* Handle See All click */ })
+            MovieCardGrid(new_movie, onSeeAllClicked = { /* Handle See All click */ }, navController)
         }
     }
 }

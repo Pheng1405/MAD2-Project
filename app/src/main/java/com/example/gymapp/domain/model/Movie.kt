@@ -14,18 +14,9 @@ data  class MovieModel (
 )
 
 @Serializable
-data  class MovieModelDto (
+data  class MovieDto (
     val data : MovieModel,
 )
-
-//@Serializable
-//data class MovieModel(
-//    val id : String,
-//    val title: String,
-//    val genre: String,
-//    val rating: Double,
-//    val imageUrl: String
-//)
 
 @Serializable
 data class AllMovieModel(

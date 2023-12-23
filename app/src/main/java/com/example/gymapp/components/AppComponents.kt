@@ -1153,7 +1153,7 @@ fun UpcomingMoviesComponent(
 }
 
 @Composable
-fun MovieItem(movie: MovieModel, onMovieClick: () -> Unit) {
+fun MovieItem(movie: MovieModel, onMovieClick: () -> Unit, navController: NavController) {
     Box(
         modifier = Modifier
             .width(180.dp)
@@ -1161,6 +1161,10 @@ fun MovieItem(movie: MovieModel, onMovieClick: () -> Unit) {
             .padding(horizontal = 4.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(color = Color.Black)
+            .clickable(
+                onClick = {
+                navController.navigate(Screen.MovieDetail.route+"/${movie.id}")
+            })
     ) {
         Image(
             painter = rememberImagePainter(
@@ -1214,7 +1218,7 @@ fun MovieItem(movie: MovieModel, onMovieClick: () -> Unit) {
 }
 
 @Composable
-fun NewMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
+fun NewMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit, navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -1247,7 +1251,9 @@ fun NewMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
         ) {
             items(movies) { movie ->
-                MovieItem(movie = movie, onMovieClick = { /* TODO: Handle movie click */ })
+                MovieItem(movie = movie, onMovieClick = {
+                    navController.navigate(Screen.MovieDetail.route + "/${movie?.id}")
+                }, navController)
             }
         }
     }
@@ -1255,7 +1261,7 @@ fun NewMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
 
 
 @Composable
-fun RecommendMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
+fun RecommendMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit, navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -1288,7 +1294,7 @@ fun RecommendMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
         ) {
             items(movies) { movie ->
-                MovieItem(movie = movie, onMovieClick = { /* TODO: Handle movie click */ })
+                MovieItem(movie = movie, onMovieClick = { /* TODO: Handle movie click */ }, navController)
             }
         }
     }
@@ -1390,18 +1396,18 @@ fun ImageComponent(imgUrl : String){
 
 
 @Composable
-fun MovieScreenList(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
+fun MovieScreenList(movies: List<MovieModel>, onSeeAllClicked: () -> Unit, navController: NavController) {
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
         ) {
             items(movies) { movie ->
-                MovieItem(movie = movie, onMovieClick = { /* TODO: Handle movie click */ })
+                MovieItem(movie = movie, onMovieClick = { /* TODO: Handle movie click */ }, navController)
             }
         }
 }
 
 @Composable
-fun MovieCardGrid(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
+fun MovieCardGrid(movies: List<MovieModel>, onSeeAllClicked: () -> Unit, navController: NavController) {
     LazyColumn {
         items(movies.chunked(2)) { rowCards ->
             Row(
@@ -1411,7 +1417,7 @@ fun MovieCardGrid(movies: List<MovieModel>, onSeeAllClicked: () -> Unit) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 for (card in rowCards) {
-                    MovieItem(movie = card, onMovieClick = { /* TODO: Handle movie click */ })
+                    MovieItem(movie = card, onMovieClick = { /* TODO: Handle movie click */ }, navController)
                 }
                 if (rowCards.size % 2 != 0) {
                     Spacer(modifier = Modifier.weight(1f))

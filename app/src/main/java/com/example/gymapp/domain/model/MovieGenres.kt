@@ -15,13 +15,6 @@ data  class MovieGenres (
 data  class MovieGenresDto (
     val data : MovieGenres,
 )
-//@Serializable
-//data  class MovieGenres (
-//    val id : String?,
-//    val name : String?,
-//    val description : String?,
-//    val thumbnail : String?,
-//)
 
 @Serializable
 data class AllMovieGenres(

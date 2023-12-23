@@ -131,7 +131,7 @@ fun MovieDetailScreen(id: String, navController: NavController,  movieDetailView
                     modifier = Modifier.padding(10.dp),
                     style = TextStyle(fontSize = 18.sp, color = Color.White)
                 )
-                RecommendMoviesSection(movieList) {}
+                RecommendMoviesSection(movieList, onSeeAllClicked = {}, navController)
 
             }
         }

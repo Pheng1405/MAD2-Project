@@ -1,10 +1,9 @@
 package com.example.gymapp.data.remote
 import com.example.gymapp.domain.model.AllMovieGenres
 import com.example.gymapp.domain.model.AllMovieModel
-import com.example.gymapp.domain.model.MovieGenres
+import com.example.gymapp.domain.model.MovieDto
 import com.example.gymapp.domain.model.MovieGenresDto
 import com.example.gymapp.domain.model.MovieModel
-import com.example.gymapp.domain.model.MovieModelDto
 import com.example.gymapp.domain.model.SignInDto
 import com.example.gymapp.domain.model.SignInResponseDto
 import retrofit2.http.Body
@@ -30,5 +29,5 @@ interface MovieGenresApi{
     suspend fun getAllMovies(): AllMovieModel
 
     @GET("/video/one-guest/{id}")
-    suspend fun getOneMovie(@Path("id") id: String): MovieModelDto
+    suspend fun getOneMovie(@Path("id") id: String): MovieDto
 }
