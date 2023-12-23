@@ -7,9 +7,7 @@ data class MovieGenresDetailScreenState(
     val data: MovieGenres?,
     val error: String,
 ){
-    fun toUiState() = MovieGenresDetailScreenState(
-        isLoading, data, error
-    )
+    fun toUiState() = MovieGenresDetailScreenState(isLoading, data, error)
 }
 
 data class MovieGenresDetailModelState(
@@ -17,7 +15,5 @@ data class MovieGenresDetailModelState(
     val data: MovieGenres? = null,
     val error: String = "",
 ) {
-    fun toUiState() = MovieGenresDetailModelState(
-        isLoading, data, error
-    )
+    fun toUiState() = MovieGenresDetailModelState(isLoading, data, error)
 }

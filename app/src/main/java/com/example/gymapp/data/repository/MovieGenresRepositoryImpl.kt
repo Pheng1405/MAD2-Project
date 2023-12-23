@@ -7,6 +7,7 @@ import com.example.gymapp.domain.model.AllMovieModel
 
 import com.example.gymapp.domain.model.MovieGenresDto
 import com.example.gymapp.domain.model.MovieModel
+import com.example.gymapp.domain.model.MovieModelDto
 import com.example.gymapp.domain.model.SignInDto
 import com.example.gymapp.domain.model.SignInResponseDto
 import com.example.gymapp.util.Resource
@@ -90,7 +91,7 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getOneMovieById(id: String): Flow<Resource<MovieModel>> = flow {
+    override suspend fun getOneMovieById(id: String): Flow<Resource<MovieModelDto>> = flow {
         emit(Resource.Loading())
         try {
             val response = movieGenresApi.getOneMovie(id)

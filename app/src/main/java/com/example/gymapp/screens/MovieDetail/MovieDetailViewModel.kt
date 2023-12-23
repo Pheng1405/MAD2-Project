@@ -1,8 +1,10 @@
 package com.example.gymapp.screens.MovieDetail
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gymapp.domain.use_case.UseCases
+import com.example.gymapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -10,6 +12,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
@@ -26,25 +29,40 @@ class MovieDetailViewModel @Inject constructor(
             viewModelState.value.toUiState()
         )
 
-    init {
-        getOneMovieDetail()
+    fun loadMovieData(id: String) {
+        getOneMovieDetail(id)
     }
 
-    private fun getOneMovieDetail() {
+    private fun getOneMovieDetail(id : String) {
         viewModelScope.launch {
-            useCases.getOneMovieGenresUseCase("").onEach { result ->
+            useCases.getOneMovieUseCase(id).collect { result ->
+                viewModelState.update { state ->
+                    result.also { println(it) }
+                    when (result) {
+                        is Resource.Success -> {
+                            state.copy(
+                                data = result.data?.data,
+                                isLoading = false,
+                                error = ""
+                            )
+                        }
 
-//                viewModelState.update { state ->
-//                    when (result) {
-//                        is Resource.Success -> state.copy(data = result.data.,
-//                            isLoading = false,
-//                            error = "")
-//                        is Resource.Error -> state.copy(error = result.message
-//                            ?: "An error occurred", data = emptyList(), isLoading = false)
-//                        is Resource.Loading -> state.copy(isLoading = true, error = "")
-//                    }
-//                }
-            }.launchIn(this)
+                        is Resource.Error -> {
+                            Log.d("tag", result.data.toString());
+                            state.copy(
+                                error = result.message ?: "An error occurred",
+                                data = null,
+                                isLoading = false
+                            )
+                        }
+
+                        is Resource.Loading -> state.copy(
+                            isLoading = true,
+                            error = ""
+                        )
+                    }
+                }
+            }
         }
     }
 }

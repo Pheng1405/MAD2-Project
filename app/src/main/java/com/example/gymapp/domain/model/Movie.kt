@@ -10,6 +10,12 @@ data  class MovieModel (
     val thumbnail : String,
     val land_thumbnail : String,
     val rating : Double,
+    val link : String,
+)
+
+@Serializable
+data  class MovieModelDto (
+    val data : MovieModel,
 )
 
 //@Serializable
