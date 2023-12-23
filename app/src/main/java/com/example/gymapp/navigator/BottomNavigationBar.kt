@@ -120,7 +120,7 @@ fun BottomNavigationBar() {
                 )
             }
 
-            composable(Screen.MovieDetail.route) { backStackEntry ->
+            composable("${Screen.MovieDetail.route}/{id}") { backStackEntry ->
                 val id = backStackEntry.arguments?.getString("id")
                 if (id != null) {
                     MovieDetailScreen(
