@@ -44,11 +44,6 @@ import com.example.gymapp.util.Constants
 @ExperimentalMaterial3Api
 @Composable
 fun MovieDetailScreen(id: String, navController: NavController,  movieDetailViewModel: MovieDetailViewModel = hiltViewModel(),) {
-        val movieList = listOf(
-            MovieModel("1", "Wanda Vision", "Action", "https://www.movieposters.com/cdn/shop/products/wandavision.R85648_480x.progressive.jpg?v=1673638271", "https://www.movieposters.com/cdn/shop/products/wandavision.R85648_480x.progressive.jpg?v=1673638271", 4.5, ""),
-            MovieModel("2","The Flash", "Action",  "https://www.movieposters.com/cdn/shop/products/965a99756171f61611b6d6667b9f4004_480x.progressive.jpg?v=1573572622","https://www.movieposters.com/cdn/shop/products/wandavision.R85648_480x.progressive.jpg?v=1673638271", 4.5, ""),
-            MovieModel("1", "Loki", "Action",  "https://www.movieposters.com/cdn/shop/products/54362_2_480x.progressive.png.jpg?v=1634831916","https://www.movieposters.com/cdn/shop/products/wandavision.R85648_480x.progressive.jpg?v=1673638271", 4.5, "",)
-        )
         // Fetch the data when the composable enters the composition or when 'id' changes
         LaunchedEffect(id) {
             movieDetailViewModel.loadMovieData(id)
@@ -62,6 +57,15 @@ fun MovieDetailScreen(id: String, navController: NavController,  movieDetailView
         val activity = LocalContext.current as Activity
         val showVideoPlayer = remember { mutableStateOf(false) }
 
+        LaunchedEffect(movieDetail?.categories?.get(0)?.category_id){
+            movieDetail?.categories?.get(0)?.category_id?.let {
+                movieDetailViewModel.loadRelatedMovie(
+                    it
+                )
+            }
+        }
+
+    val relatedMovie = state.relatedMovies;
 
         LazyColumn(modifier = Modifier.fillMaxSize()) {
 
@@ -131,7 +135,9 @@ fun MovieDetailScreen(id: String, navController: NavController,  movieDetailView
                     modifier = Modifier.padding(10.dp),
                     style = TextStyle(fontSize = 18.sp, color = Color.White)
                 )
-                RecommendMoviesSection(movieList, onSeeAllClicked = {}, navController)
+                if (relatedMovie != null) {
+                    RecommendMoviesSection(relatedMovie, onSeeAllClicked = {}, navController)
+                }
 
             }
         }

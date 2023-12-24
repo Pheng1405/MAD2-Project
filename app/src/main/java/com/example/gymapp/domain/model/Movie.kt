@@ -9,10 +9,6 @@ data class CategoryModel(
 )
 
 @Serializable
-data class CategoriesModel(
-    val categories : List<CategoryModel>
-)
-@Serializable
 data  class MovieModel (
     val id : String,
     val title : String,
@@ -21,7 +17,7 @@ data  class MovieModel (
     val land_thumbnail : String,
     val rating : Double,
     val link : String,
-    val category : CategoriesModel,
+    val categories : List<CategoryModel>,
 )
 
 @Serializable

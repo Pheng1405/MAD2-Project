@@ -31,6 +31,10 @@ class MovieDetailViewModel @Inject constructor(
         getOneMovieDetail(id)
     }
 
+    fun loadRelatedMovie(category_id : String){
+        getRelatedMovie(category_id)
+    }
+
     private fun getOneMovieDetail(id : String) {
         viewModelScope.launch {
             useCases.getOneMovieUseCase(id).collect { result ->
@@ -54,6 +58,37 @@ class MovieDetailViewModel @Inject constructor(
                             )
                         }
 
+                        is Resource.Loading -> state.copy(
+                            isLoading = true,
+                            error = ""
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getRelatedMovie(category_id: String){
+        viewModelScope.launch {
+            useCases.searchAllMovie(category_id, "").collect  { result ->
+                viewModelState.update { state ->
+                    result.also { println(it) }
+                    when (result) {
+                        is Resource.Success ->{
+                            state.copy(
+                                relatedMovies = result.data?.data,
+                                isLoading = false,
+                                error = ""
+                            )
+                        }
+                        is Resource.Error -> {
+                            Log.d("tag", result.data.toString());
+                            state.copy(
+                                error = result.message ?: "An error occurred",
+                                data = null,
+                                isLoading = false
+                            )
+                        }
                         is Resource.Loading -> state.copy(
                             isLoading = true,
                             error = ""
