@@ -31,12 +31,12 @@ class MovieScreenViewModel @Inject constructor(
         )
 
     init {
-        getAllMovie()
+        getAllMovie("", "")
     }
 
-    private fun getAllMovie() {
+    fun getAllMovie(category : String = "", title : String) {
         viewModelScope.launch {
-            useCases.getAllMovieUseCase().onEach { result ->
+            useCases.searchAllMovie(category, title).onEach { result ->
                 viewModelState.update { state ->
                     when (result) {
                         is Resource.Success -> {

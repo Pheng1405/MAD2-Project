@@ -4,5 +4,5 @@ import com.example.gymapp.domain.MovieRepository
 
 
 class SearchAllMovie(private val repository: MovieRepository) {
-    suspend operator fun invoke(params : String) = repository.SearchAllMovie(params)
+    suspend operator fun invoke(category : String, title : String) = repository.SearchAllMovie(category, title)
 }

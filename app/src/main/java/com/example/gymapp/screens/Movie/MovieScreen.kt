@@ -39,7 +39,9 @@ fun MovieScreen(
         modifier = Modifier.background(color = Color.Black)
     ) {
 
-        SearchBar()
+        SearchBar("What to Watch?", onSearchQueryChanged = {
+                query -> movieScreenViewModel.getAllMovie("", query)
+        })
         if (new_movie != null) {
             MovieCardGrid(new_movie, onSeeAllClicked = { /* Handle See All click */ }, navController)
         }

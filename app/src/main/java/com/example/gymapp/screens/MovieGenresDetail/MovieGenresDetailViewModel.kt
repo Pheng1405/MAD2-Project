@@ -68,9 +68,9 @@ class MovieGenresDetailViewModel @Inject constructor(
     }
 
 
-    private fun getRelatedMovie(params : String){
+    private fun getRelatedMovie(category_id: String){
         viewModelScope.launch {
-            useCases.searchAllMovie(params).collect  { result ->
+            useCases.searchAllMovie(category_id, "").collect  { result ->
                 viewModelState.update { state ->
                     result.also { println(it) }
                     when (result) {

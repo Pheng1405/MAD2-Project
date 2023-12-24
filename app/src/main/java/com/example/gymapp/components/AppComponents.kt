@@ -1027,9 +1027,8 @@ fun GreetingSection(username: String = "Pheng") {
 }
 
 //Search Bar Above the movie Section
-@Preview
 @Composable
-fun SearchBar(hint: String = "What to Watch?") {
+fun SearchBar(hint: String = "What to Watch?", onSearchQueryChanged: (String) -> Unit) {
     var text by rememberSaveable { mutableStateOf("") }
 
     Row(
@@ -1041,7 +1040,10 @@ fun SearchBar(hint: String = "What to Watch?") {
     ) {
         BasicTextField(
             value = text,
-            onValueChange = { text = it },
+            onValueChange = {
+                text = it
+                onSearchQueryChanged(it)
+                            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp)

@@ -1,11 +1,13 @@
 package com.example.gymapp.screens.Home
 
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -31,9 +33,11 @@ fun HomeScreen(
     val state by homeScreenViewModel.uiState.collectAsState()
     val new_movie : List<MovieModel>? = state.movie;
 
-    Column {
+    Column (
+        modifier = Modifier.background(color = Color.Black)
+    ) {
         GreetingSection()
-        SearchBar()
+        SearchBar(hint = "What to watch?", onSearchQueryChanged = {})
         LazyColumn {
 //            item {
 //                UpcomingMoviesComponent(

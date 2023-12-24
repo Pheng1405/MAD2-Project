@@ -30,7 +30,7 @@ interface MovieGenresApi{
     suspend fun getAllMovies(): AllMovieModel
 
     @GET("/video/all-no-auth?")
-    suspend fun searchAllMovie(@Query("category_id") queryParam: String): AllMovieModel
+    suspend fun searchAllMovie(@Query("category_id") category: String, @Query("title") title : String): AllMovieModel
 
     @GET("/video/one-guest/{id}")
     suspend fun getOneMovie(@Path("id") id: String): MovieDto
