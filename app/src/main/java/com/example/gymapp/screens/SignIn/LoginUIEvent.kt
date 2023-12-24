@@ -1,4 +1,4 @@
-package com.example.gymapp.data.login
+package com.example.gymapp.screens.SignIn
 
 sealed class LoginUIEvent{
 

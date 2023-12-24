@@ -1,4 +1,4 @@
-package com.example.gymapp.screens
+package com.example.gymapp.screens.SignUp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,24 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.gymapp.R
 import com.example.gymapp.components.ButtonComponent
 import com.example.gymapp.components.CheckboxComponent
 import com.example.gymapp.components.ClickableLoginTextComponent
-import com.example.gymapp.components.DividerTextComponent
 import com.example.gymapp.components.HeadingTextComponent
 import com.example.gymapp.components.MyTextFieldComponent
 import com.example.gymapp.components.NormalTextComponent
 import com.example.gymapp.components.PasswordTextFieldComponent
-import com.example.gymapp.navigator.PostOfficeAppRouter
 import com.example.gymapp.navigator.Screen
-import com.example.gymapp.data.signup.SignupUIEvent
-import com.example.gymapp.data.signup.SignupViewModel
 
 @Composable
 fun SignUpScreen(signupViewModel: SignupViewModel = viewModel(), navController: NavController) {

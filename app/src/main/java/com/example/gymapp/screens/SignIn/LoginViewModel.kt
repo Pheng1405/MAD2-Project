@@ -1,4 +1,4 @@
-package com.example.gymapp.data.login
+package com.example.gymapp.screens.SignIn
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

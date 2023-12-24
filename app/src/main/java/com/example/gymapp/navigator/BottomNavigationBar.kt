@@ -22,9 +22,9 @@ import com.example.gymapp.screens.Movie.MovieScreen
 import com.example.gymapp.screens.MovieDetail.MovieDetailScreen
 import com.example.gymapp.screens.MovieGenres.MovieGenresScreen
 import com.example.gymapp.screens.MovieGenresDetail.MovieGenresDetailScreen
-import com.example.gymapp.screens.SignInScreen
-import com.example.gymapp.screens.SignUpScreen
-import com.example.gymapp.screens.TermsAndConditionsScreen
+import com.example.gymapp.screens.SignIn.SignInScreen
+import com.example.gymapp.screens.SignUp.SignUpScreen
+import com.example.gymapp.screens.TermAndCondition.TermsAndConditionsScreen
 import com.example.gymapp.ui.theme.Primary
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,4 +1,4 @@
-package com.example.gymapp.data.signup
+package com.example.gymapp.screens.SignUp
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf

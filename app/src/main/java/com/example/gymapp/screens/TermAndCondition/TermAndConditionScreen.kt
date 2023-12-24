@@ -1,4 +1,4 @@
-package com.example.gymapp.screens
+package com.example.gymapp.screens.TermAndCondition
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
