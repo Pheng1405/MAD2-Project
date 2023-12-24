@@ -23,4 +23,12 @@
     <string name="menu">Menu</string>
     <string name="navigation_header">App Drawer</string>
 
+    <string name="account">Account</string>
+    <string name="account_subtitle">Edit or manage your account</string>
+    <string name="change_profile_picture">Change profile picture</string>
+    <string name="second_name">Second name</string>
+    <string name="location">Location</string>
+    <string name="phone">Phone</string>
+    <string name="save">Save</string>
+
 </resources>

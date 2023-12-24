@@ -1,99 +1,114 @@
 package com.example.gymapp.screens
 
-import android.graphics.drawable.Icon
-import android.media.Image
-import android.widget.Toast
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.rememberImagePainter
 import com.example.gymapp.R
-import com.example.gymapp.components.HeadingTextComponent
-import com.example.gymapp.components.NormalTextComponent
+import com.example.gymapp.components.DefaultButton
+import com.example.gymapp.components.Header
+import com.example.gymapp.components.SpaceVertical32
+import com.example.gymapp.composable.InformationCard
+import com.example.gymapp.composable.ProfileAvatar
+import com.example.gymapp.composable.SpaceHorizontal16
+import com.example.gymapp.composable.SpaceVertical24
+import com.example.gymapp.composable.TextButton
+import com.example.gymapp.viewmodel.ProfileViewModel
+import com.example.gymapp.viewmodel.state.ProfileUiState
+
 
 @Composable
-fun TermsAndConditionsScreen(navController: NavController) {
-    Surface(modifier = Modifier
-        .fillMaxSize()
-        .background(color = Color.White)
-        .padding(16.dp)) {
-
-        ProfileScreen();
-//
-//        Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .background(Color.White)
-//        ){
-//            HeadingTextComponent(value = stringResource(id = R.string.terms_and_conditions_header))
-//        }
-    }
+fun TermsAndConditionsScreen(viewModel: ProfileViewModel = hiltViewModel(),) {
+    val state by viewModel.state.collectAsState()
+    ProfileContent(
+        state = state,
+        onChangeFirstName = viewModel::onChangeFirstName,
+        onChangeLastName = viewModel::onChangeLastName,
+        onChangeLocation = viewModel::onChangeLocation,
+        onChangeEmail = viewModel::onChangeEmail,
+        onChangePhone = viewModel::onChangePhone,
+        onSaveUserInfo = viewModel::onSaveUserInfo
+    )
 }
 @Composable
-fun ProfileScreen() {
-    val notification = rememberSaveable {
-        mutableStateOf("")
-    }
-    if (notification.value.isNotEmpty()){
-        Toast.makeText(LocalContext.current, notification.value, Toast.LENGTH_LONG).show()
-        notification.value = ""
-    }
+private fun ProfileContent(
+    state: ProfileUiState,
+    onChangeFirstName: (String) -> Unit,
+    onChangeLastName: (String) -> Unit,
+    onChangeLocation: (String) -> Unit,
+    onChangeEmail: (String) -> Unit,
+    onChangePhone: (String) -> Unit,
+    onSaveUserInfo: () -> Unit,
+) {
     Column(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .padding(8.dp)
-    ){
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ){
-            Text(text = "Cancel",
-                modifier = Modifier.clickable { notification.value = "Cancelled" })
-            Text(text = "Edit",
-                modifier = Modifier.clickable { notification.value = "Profile Update" })
+            .fillMaxSize()
+            .padding(horizontal = 16.dp, vertical = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Header(
+            title = stringResource(R.string.account),
+            subtitle = stringResource(R.string.account_subtitle)
+        )
+        SpaceVertical32()
+
+        ProfileAvatar(
+            painter = rememberImagePainter(data = ""),
+            size = 128
+        )
+        SpaceVertical24()
+
+        TextButton(text = stringResource(R.string.change_profile_picture)) {}
+        SpaceVertical32()
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Box(modifier = Modifier.weight(1F)) {
+                InformationCard(
+                    title = stringResource(R.string.first_name),
+                    information = state.firstName,
+                    onTextChange = onChangeFirstName
+                )
+            }
+            SpaceHorizontal16()
+            Box(modifier = Modifier.weight(1F)) {
+                InformationCard(
+                    title = stringResource(R.string.second_name),
+                    information = state.lastName,
+                    onTextChange = onChangeLastName
+                )
+            }
         }
+        InformationCard(
+            title = stringResource(R.string.location),
+            information = state.location,
+            onTextChange = onChangeLocation
+        )
+        InformationCard(
+            title = stringResource(R.string.email),
+            information = state.email,
+            onTextChange = onChangeEmail
+        )
+        InformationCard(
+            title = stringResource(R.string.phone),
+            information = state.phone,
+            onTextChange = onChangePhone
+        )
+
+        Spacer(modifier = Modifier.weight(1F))
+        DefaultButton(buttonText = stringResource(R.string.save), onClick = onSaveUserInfo)
     }
 }
-@Composable
-fun ProfileImage(){
-    Surface (modifier = Modifier
-        .fillMaxSize()
-        .background(color = Color.White)
-        .padding(16.dp)){
-        Column (modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-            .wrapContentHeight(),
-            horizontalAlignment = Alignment.CenterHorizontally){
 
-        }
-
-    }
-
-}
 
