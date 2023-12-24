@@ -1234,7 +1234,7 @@ fun NewMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit, navC
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "New Movies",
+                text = "You might like these movies",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.clickable { /* Handle upcoming movies click */ },
@@ -1277,7 +1277,7 @@ fun RecommendMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "New Movies",
+                text = "You might like these movies",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.clickable { /* Handle upcoming movies click */ },

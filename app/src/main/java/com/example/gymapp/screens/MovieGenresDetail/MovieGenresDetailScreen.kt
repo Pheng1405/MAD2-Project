@@ -61,11 +61,13 @@ fun MovieGenresDetailScreen (
     // Fetch the data when the composable enters the composition or when 'id' changes
     LaunchedEffect(genresId) {
         movieGenresDetailViewModel.loadGenreData(genresId)
+        movieGenresDetailViewModel.loadRelatedMovie(genresId)
     }
 
     // Observe the LiveData or StateFlow from ViewModel
     val state by movieGenresDetailViewModel.uiState.collectAsState()
     val genresDetail = state.data;
+
     val relatedMovie = state.relatedMovies;
 
     Log.i("relate movie" , relatedMovie.toString())

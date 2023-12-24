@@ -30,7 +30,9 @@ class MovieGenresDetailViewModel @Inject constructor(
 
     fun loadGenreData(id: String) {
         getMovieGenresById(id)
-        getRelatedMovie("1b2f0475-84bc-4fd5-a157-b69d4bd7d973")
+    }
+    fun loadRelatedMovie(category_id : String){
+        getRelatedMovie(category_id)
     }
 
     // if use retrofit use suspend private suspend fun getMovieGenresById
