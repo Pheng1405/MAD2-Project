@@ -1,6 +1,9 @@
 package com.example.gymapp.screens
 
+import android.graphics.drawable.Icon
+import android.media.Image
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,13 +12,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -66,15 +74,24 @@ fun ProfileScreen() {
         ){
             Text(text = "Cancel",
                 modifier = Modifier.clickable { notification.value = "Cancelled" })
-            Text(text = "Save",
+            Text(text = "Edit",
                 modifier = Modifier.clickable { notification.value = "Profile Update" })
         }
     }
 }
 @Composable
 fun ProfileImage(){
-    val  imageUrl = rememberSaveable {
-        mutableStateOf("")
+    Surface (modifier = Modifier
+        .fillMaxSize()
+        .background(color = Color.White)
+        .padding(16.dp)){
+        Column (modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+            .wrapContentHeight(),
+            horizontalAlignment = Alignment.CenterHorizontally){
+
+        }
 
     }
 
