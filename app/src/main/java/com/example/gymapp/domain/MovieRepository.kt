@@ -19,4 +19,6 @@ interface  MovieRepository {
     suspend fun getAllMovie(): Flow<Resource<AllMovieModel>>
 
     suspend fun getOneMovieById(id : String) : Flow<Resource<MovieDto>>
+
+    suspend fun SearchAllMovie(params : String): Flow<Resource<AllMovieModel>>
 }

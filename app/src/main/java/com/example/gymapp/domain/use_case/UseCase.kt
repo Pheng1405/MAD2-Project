@@ -6,7 +6,7 @@ data class UseCases(
     val signInUseCase: SignInUseCase,
     val getAllMovieUseCase: GetAllMovieUseCase,
     val getOneMovieUseCase: GetOneMovieUseCase,
-
+    val searchAllMovie: SearchAllMovie,
 //    val getCartUseCase: GetCartUseCase,
 //    val getCartUseCase: GetCartUseCase,
 //    val getAllProductsUseCase: GetAllProductsUseCase,

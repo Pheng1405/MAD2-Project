@@ -12,6 +12,7 @@ import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MovieGenresApi{
     @GET("/video-category/all")
@@ -27,6 +28,9 @@ interface MovieGenresApi{
 
     @GET("/video/all-no-auth")
     suspend fun getAllMovies(): AllMovieModel
+
+    @GET("/video/all-no-auth?")
+    suspend fun searchAllMovie(@Query("category_id") queryParam: String): AllMovieModel
 
     @GET("/video/one-guest/{id}")
     suspend fun getOneMovie(@Path("id") id: String): MovieDto

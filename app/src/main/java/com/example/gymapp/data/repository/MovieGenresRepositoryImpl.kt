@@ -106,6 +106,23 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun SearchAllMovie(params : String): Flow<Resource<AllMovieModel>> = flow{
+        emit(Resource.Loading())
+        try {
+            val response = movieGenresApi.searchAllMovie(params)
+            emit(Resource.Success(data = response))
+        } catch (e: HttpException) {
+            emit(Resource.Error(
+                message = e.message.toString(),
+            ))
+
+        } catch (e: IOException) {
+            emit(Resource.Error(
+                message = e.message.toString(),
+            ))
+        }
+    }
+
 
 //    override suspend fun getOneMovie(id: String): Flow<Resource<MovieGenres>> = flow {
 //        emit(Resource.Loading())

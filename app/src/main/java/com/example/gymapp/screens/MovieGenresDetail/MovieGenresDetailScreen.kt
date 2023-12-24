@@ -66,9 +66,9 @@ fun MovieGenresDetailScreen (
     // Observe the LiveData or StateFlow from ViewModel
     val state by movieGenresDetailViewModel.uiState.collectAsState()
     val genresDetail = state.data;
+    val relatedMovie = state.relatedMovies;
 
-
-
+    Log.i("relate movie" , relatedMovie.toString())
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
 
@@ -110,12 +110,14 @@ fun MovieGenresDetailScreen (
             }
 
             // Recommended section
-//            Text(
-//                text = "Recommended",
-//                modifier = Modifier.padding(10.dp),
-//                style = TextStyle(fontSize = 18.sp, color = Color.White)
-//            )
-//            RecommendMoviesSection(movieList, onSeeAllClicked = {})
+            Text(
+                text = "Recommended",
+                modifier = Modifier.padding(10.dp),
+                style = TextStyle(fontSize = 18.sp, color = Color.White)
+            )
+            if (relatedMovie != null) {
+                RecommendMoviesSection(relatedMovie, onSeeAllClicked = {}, navController)
+            }
 
         }
     }
