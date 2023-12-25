@@ -5,6 +5,8 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -20,22 +22,25 @@ data class BottomNavigationItem(
                 icon = Icons.Filled.Home,
                 route = Screen.HomeScreen.route
             ),
-            BottomNavigationItem(
-                label = "Sign Up",
-                icon = Icons.Filled.Search,
-                route = Screen.SignUpScreen.route
-            ),
-
-            BottomNavigationItem(
-                label = "Genres",
-                icon = Icons.Filled.DateRange,
-                route = Screen.Genres.route
-            ),
 
             BottomNavigationItem(
                 label = "Movie Screen",
-                icon = Icons.Filled.AccountCircle,
+                icon = Icons.Filled.PlayArrow,
                 route = Screen.MovieDetail.route
+            ),
+
+
+            BottomNavigationItem(
+                label = "Genres",
+                icon = Icons.Filled.List,
+                route = Screen.Genres.route
+            ),
+
+
+            BottomNavigationItem(
+                label = "Profile",
+                icon = Icons.Filled.Search,
+                route = Screen.SignUpScreen.route
             ),
         )
     }
