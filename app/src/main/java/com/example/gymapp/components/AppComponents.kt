@@ -1236,7 +1236,49 @@ fun NewMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit, navC
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "You might like these movies",
+                text = "New Movies",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable { /* Handle upcoming movies click */ },
+                style = TextStyle(color = Color.White, fontSize = 12.sp)
+            )
+            Text(
+                text = "See All",
+                fontSize = 14.sp,
+                modifier = Modifier.clickable(onClick = onSeeAllClicked),
+                style = TextStyle(color = Color.White, fontSize = 12.sp)
+            )
+        }
+        LazyRow(
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp)
+        ) {
+            items(movies) { movie ->
+                MovieItem(movie = movie, onMovieClick = {
+                    navController.navigate(Screen.MovieDetail.route + "/${movie?.id}")
+                }, navController)
+            }
+        }
+    }
+}
+
+@Composable
+fun SuggestMoviesSection(movies: List<MovieModel>, onSeeAllClicked: () -> Unit, navController: NavController) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(color = Color.Black)
+    ) {
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = Color.Black)
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "You might like this",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.clickable { /* Handle upcoming movies click */ },
