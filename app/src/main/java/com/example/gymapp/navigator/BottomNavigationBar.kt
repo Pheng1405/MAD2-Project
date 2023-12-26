@@ -12,6 +12,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -35,20 +36,23 @@ fun BottomNavigationBar() {
     val currentDestination = navBackStackEntry?.destination
     Scaffold(
         modifier = Modifier
-            .fillMaxSize()
-            .background(color = Primary),
+            .fillMaxSize().background(color = Color.Black),
         bottomBar = {
-            NavigationBar {
+            NavigationBar(
+                containerColor = Color.Black, // Set the background color of the NavigationBar to black
+                contentColor = Color.White
+            ) {
                 BottomNavigationItem().bottomNavigationItems().forEachIndexed { _, navigationItem ->
                     NavigationBarItem(
                         selected = navigationItem.route == currentDestination?.route,
                         label = {
-                            Text(navigationItem.label)
+                            Text(navigationItem.label, color = Color.White)
                         },
                         icon = {
                             Icon(
                                 navigationItem.icon,
-                                contentDescription = navigationItem.label
+                                contentDescription = navigationItem.label,
+                                tint = Color.White
                             )
                         },
                         onClick = {

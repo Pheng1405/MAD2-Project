@@ -39,7 +39,7 @@ data class BottomNavigationItem(
 
             BottomNavigationItem(
                 label = "Profile",
-                icon = Icons.Filled.Search,
+                icon = Icons.Filled.AccountCircle,
                 route = Screen.SignUpScreen.route
             ),
         )
